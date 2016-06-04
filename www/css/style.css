@@ -1,0 +1,23 @@
+.content{
+  padding-top: 50px;
+}
+.input-label{
+  /*margin-top: 20px;*/
+  font-family: "Gafata";
+  font-size: 20px;
+  margin-top: -4px;
+  color:darkseagreen;
+  padding-left: 4px;
+
+}
+.item-input{
+  font-size: 20px;
+}
+.input{
+  font-family: "Gafata";
+  font-size: 20px;
+}
+.bar-stable{
+  color:white;
+}
+
