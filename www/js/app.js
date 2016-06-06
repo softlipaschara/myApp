@@ -31,6 +31,7 @@ exampleApp.controller('MapController', function($scope, $ionicLoading) {
     var mapOptions = {
       center: myLatlng,
       zoom: 16,
+      disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
