@@ -74,8 +74,8 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .cameraIcon{
   background: lightyellow;
   width:15%;
-  padding-top: 70px;
-  padding-bottom: 55px;
+  padding-top: 72px;
+  padding-bottom: 58px;
 
 }
 .button.activated{
