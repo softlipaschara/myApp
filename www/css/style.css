@@ -78,3 +78,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   padding-bottom: 55px;
 
 }
+.button.activated{
+  border-color: lightyellow;
+  background-color: lightyellow;
+}
