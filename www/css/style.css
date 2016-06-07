@@ -13,7 +13,8 @@
 
 }
 .item{
-  /*border:1px solid #EBF0E6;*/
+  margin:0 25px;
+  border-radius: 25px;
 }
 
 .item-input{
@@ -70,6 +71,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   background: lightyellow;
   /*margin-top: 20px;*/
   border-radius: 20px;
+  /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
 }
 .cameraIcon{
   background: lightyellow;
@@ -82,3 +84,5 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   border-color: lightyellow;
   background-color: lightyellow;
 }
+
+
