@@ -99,14 +99,15 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   flex-direction: row;
   justify-content: center;
 }
-.send{
-  margin-top: 30px;
-  margin-bottom: 15px;
-}
+
 .button.button-light.send{
   /*background-color: lightgray;*/
+  margin-top: 30px;
+  margin-bottom: 30px;
   border-radius: 25px;
   font-family: "Gafata";
   border: 1px solid lightgrey;
-  width:10%;
+  width:20%;
+  font-size: 18px;
+  min-height:53px;
 }
