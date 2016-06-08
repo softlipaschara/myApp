@@ -44,12 +44,18 @@
         <div class="area">
           <!--<p>Take a photo so that people can recognize you:</p>-->
         </div>
-        <div class="containerCam">
-          <button class="button buttonCam" ng-click="getPhoto()">
-            <img class="cameraIcon" src="./img/camera.png">
-          </button>
+        <div ng-switch="" on="hasPhoto">
+          <div class="containerPhoto">
+            <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+          </div>
+          <div ng-switch-default="" class="containerCam">
+            <button class="button buttonCam" ng-click="getPhoto()">
+              <img class="cameraIcon" src="./img/camera.png">
+            </button>
+          </div>
         </div>
-        <img ng-src="{{lastPhoto}}" style="max-width: 100%">
+
+
 
 
 

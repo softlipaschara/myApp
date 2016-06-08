@@ -32,19 +32,6 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
     disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
-  var getCurrentLocation = function(){
-    GoogleMap.getLocation().then(function(pos){
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        map: map,
-        title: "My Location"
-      });
-    })
-  }
-
-  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-
   google.maps.event.addDomListener(window, 'load', function() {
 
     var styles =
@@ -168,11 +155,25 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
       ];
     map.setOptions({styles: styles});
 
-    map.setCenter(myLatlng);
+    //map.setCenter(myLatlng);
 
     $scope.map = map;
+
+    getCurrentLocation();
   });
-  getCurrentLocation()
+  var getCurrentLocation = function(){
+    GoogleMap.getLocation().then(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
+      });
+    })
+  }
+
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
   $scope.getLocation = function(){
     getCurrentLocation()
   };
@@ -181,13 +182,16 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
     Camera.getPicture().then(function(imageURI) {
       console.log(imageURI);
       $scope.lastPhoto = imageURI;
+      $scope.hasPhoto = true;
     }, function(err) {
       console.err(err);
     }, {
       quality: 75,
+      allowEdit : true,
       targetWidth: 320,
       targetHeight: 320,
-      saveToPhotoAlbum: false
+      saveToPhotoAlbum: false,
+      correctOrientation: true
     });
   };
 

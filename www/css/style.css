@@ -84,5 +84,14 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   border-color: lightyellow;
   background-color: lightyellow;
 }
+.containerPhoto{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.photo{
+  width:86%;
+  border-radius: 20px;
+}
 
 
