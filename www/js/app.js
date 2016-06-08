@@ -177,21 +177,22 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
   $scope.getLocation = function(){
     getCurrentLocation()
   };
+  var options  = {
+    quality: 75,
+    allowEdit : true,
+    targetWidth: 320,
+    targetHeight: 160,
+    saveToPhotoAlbum: false,
+    correctOrientation: true
+  }
 
   $scope.getPhoto = function() {
-    Camera.getPicture().then(function(imageURI) {
+    Camera.getPicture(options).then(function(imageURI) {
       console.log(imageURI);
       $scope.lastPhoto = imageURI;
       $scope.hasPhoto = true;
     }, function(err) {
       console.err(err);
-    }, {
-      quality: 75,
-      allowEdit : true,
-      targetWidth: 320,
-      targetHeight: 320,
-      saveToPhotoAlbum: false,
-      correctOrientation: true
     });
   };
 
