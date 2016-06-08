@@ -30,37 +30,36 @@
       <ion-content class="content" ng-controller="MainController">
         <ion-scroll zooming="true" direction="y" style="width: 100%; height: 100%">
 
-        <label class="item item-input">
-          <span class="input-label">I need</span>
-          <input type="text" class="input">
-        </label>
-        <div class="area">
-          <p>Asking people in the area:</p>
-        </div>
-
-          <div id="map" data-tap-disabled="true">
+          <label class="item item-input">
+            <span class="input-label">I need</span>
+            <input type="text" class="input">
+          </label>
+          <div class="area">
+            <p>Asking people in the area:</p>
           </div>
-          <div class="gm-style-mtc" style="display:none;"></div>
-        <div class="area">
-          <p>Take a photo so that people can recognize you:</p>
-        </div>
-        <div ng-switch="" on="hasPhoto">
-          <div class="containerPhoto">
-            <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+
+            <div id="map" data-tap-disabled="true">
+            </div>
+            <div class="gm-style-mtc" style="display:none;"></div>
+          <div class="area">
+            <p>Take a photo so that people can recognize you:</p>
           </div>
-          <div ng-switch-default="" class="containerCam">
-            <button class="button buttonCam" ng-click="getPhoto()">
-              <img class="cameraIcon" src="./img/camera.png">
-            </button>
+          <div ng-switch="" on="hasPhoto">
+            <div class="containerPhoto">
+              <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+            </div>
+            <div ng-switch-default="" class="containerCam">
+              <button class="button buttonCam" ng-click="getPhoto()">
+                <img class="cameraIcon" src="./img/camera.png">
+              </button>
+            </div>
           </div>
-        </div>
-        <div>
-          <button class="button button-positive send">Send request</button>
-        </div>
-      </ion-scroll>
+          <div class="containerSend">
+            <button class="button button-light send">Jie</button>
+          </div>
 
 
-
+        </ion-scroll>
       </ion-content>
     </ion-pane>
   </body>

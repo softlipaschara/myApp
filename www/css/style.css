@@ -94,8 +94,19 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   width:86%;
   border-radius: 20px;
 }
-.send{
-  margin-top: 50px;
-
+.containerSend{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-
+.send{
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+.button.button-light.send{
+  /*background-color: lightgray;*/
+  border-radius: 25px;
+  font-family: "Gafata";
+  border: 1px solid lightgrey;
+  width:10%;
+}
