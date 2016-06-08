@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var exampleApp = angular.module('starter', ['ionic'])
+var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -23,19 +23,29 @@ var exampleApp = angular.module('starter', ['ionic'])
   });
 })
 
-exampleApp.controller('MapController', function($scope, $ionicLoading) {
+exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
+
+  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 15,
+    disableDefaultUI: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var getCurrentLocation = function(){
+    GoogleMap.getLocation().then(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
+      });
+    })
+  }
+
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
   google.maps.event.addDomListener(window, 'load', function() {
-    var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
-
-    var mapOptions = {
-      center: myLatlng,
-      zoom: 15,
-      disableDefaultUI: true,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-
-    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
     var styles =
       [
@@ -158,16 +168,35 @@ exampleApp.controller('MapController', function($scope, $ionicLoading) {
       ];
     map.setOptions({styles: styles});
 
-    navigator.geolocation.getCurrentPosition(function(pos) {
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        map: map,
-        title: "My Location"
-      });
-    });
+    map.setCenter(myLatlng);
 
     $scope.map = map;
   });
+  getCurrentLocation()
+  $scope.getLocation = function(){
+    getCurrentLocation()
+  };
 
-});
+  $scope.getPhoto = function() {
+    Camera.getPicture().then(function(imageURI) {
+      console.log(imageURI);
+      $scope.lastPhoto = imageURI;
+    }, function(err) {
+      console.err(err);
+    }, {
+      quality: 75,
+      targetWidth: 320,
+      targetHeight: 320,
+      saveToPhotoAlbum: false
+    });
+  };
+
+
+})
+
+exampleApp.controller('CameraController', function($scope, Camera) {
+
+
+
+})
+
