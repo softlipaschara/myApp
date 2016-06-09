@@ -27,8 +27,14 @@
   <body ng-app="starter">
 
     <ion-pane>
+      <div class="bar bar-header bar-stable">
+        <h1 class="title">Ji&#xE8;</h1>
+      </div>
+
       <ion-content class="content" ng-controller="MainController">
         <ion-scroll zooming="true" direction="y" style="width: 100%; height: 100%">
+
+
 
 
           <div class="inputBlock">
@@ -58,17 +64,19 @@
               <div class="containerPhoto">
                 <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
               </div>
-              <div ng-switch-default="" class="containerCam">
-                <button class="button buttonCam" ng-click="getPhoto()">
-                  <img class="cameraIcon" src="./img/camera.png">
-                </button>
+              <div class="container">
+                <div ng-switch-default="" class="containerCam">
+                  <button class="button buttonCam" ng-click="getPhoto()">
+                    <img class="cameraIcon" src="./img/camera.png">
+                  </button>
+                </div>
               </div>
             </ng-switch>
           </div>
 
 
           <div class="containerSend">
-            <button class="button button-light send">Jie</button>
+            <button class="button button-light send">Ji&#xE8;</button>
           </div>
 
 
