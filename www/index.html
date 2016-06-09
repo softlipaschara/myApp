@@ -30,30 +30,43 @@
       <ion-content class="content" ng-controller="MainController">
         <ion-scroll zooming="true" direction="y" style="width: 100%; height: 100%">
 
-          <label class="item item-input">
-            <span class="input-label">I need</span>
-            <input type="text" class="input">
-          </label>
-          <div class="area">
-            <p>Asking people in the area:</p>
+
+          <div class="inputBlock">
+            <label class="item item-input">
+              <span class="input-label">I need</span>
+              <input type="text" class="input">
+            </label>
           </div>
 
+
+
+            <div class="text textMap">
+              <p>Asking people in the area:</p>
+            </div>
             <div id="map" data-tap-disabled="true">
             </div>
-            <div class="gm-style-mtc" style="display:none;"></div>
-          <div class="area">
-            <p>Take a photo so that people can recognize you:</p>
-          </div>
-          <div ng-switch="" on="hasPhoto">
-            <div class="containerPhoto">
-              <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+            <div class="gm-style-mtc" style="display:none;">
             </div>
-            <div ng-switch-default="" class="containerCam">
-              <button class="button buttonCam" ng-click="getPhoto()">
-                <img class="cameraIcon" src="./img/camera.png">
-              </button>
+
+
+
+          <div class="photoBlock">
+            <div class="text">
+              <p>Take a photo so that people can recognize you:</p>
             </div>
+            <ng-switch on="hasPhoto">
+              <div class="containerPhoto">
+                <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+              </div>
+              <div ng-switch-default="" class="containerCam">
+                <button class="button buttonCam" ng-click="getPhoto()">
+                  <img class="cameraIcon" src="./img/camera.png">
+                </button>
+              </div>
+            </ng-switch>
           </div>
+
+
           <div class="containerSend">
             <button class="button button-light send">Jie</button>
           </div>
