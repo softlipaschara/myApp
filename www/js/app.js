@@ -37,14 +37,9 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
     var styles =
       [
         {
-          "featureType": "landscape",
+          "featureType": "road",
+          "elementType": "labels",
           "stylers": [
-            {
-              "saturation": -100
-            },
-            {
-              "lightness": 65
-            },
             {
               "visibility": "on"
             }
@@ -54,52 +49,57 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
           "featureType": "poi",
           "stylers": [
             {
-              "saturation": -100
-            },
-            {
-              "lightness": 51
-            },
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "stylers": [
             {
               "visibility": "off"
             }
           ]
         },
         {
-          "featureType": "road.highway",
+          "featureType": "road",
+          "elementType": "geometry.fill",
           "stylers": [
             {
-              "saturation": -100
+              "color": "#000000"
+              //"color":"lightyellow"
             },
             {
-              "visibility": "simplified"
+              "weight": 0.1
             }
           ]
         },
         {
-          "featureType": "road.arterial",
+          "featureType": "road",
+          "elementType": "geometry.stroke",
           "stylers": [
             {
-              "saturation": -100
+              "color": "#000000"
             },
             {
-              "lightness": 30
-            },
-            {
-              "visibility": "on"
+              "weight": 0.8
             }
           ]
         },
         {
-          "featureType": "road.local",
+          "featureType": "landscape",
           "stylers": [
             {
-              "saturation": -100
-            },
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "stylers": [
             {
-              "lightness": 40
-            },
-            {
-              "visibility": "on"
+              "visibility": "off"
             }
           ]
         },
@@ -107,15 +107,12 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
           "featureType": "transit",
           "stylers": [
             {
-              "saturation": -100
-            },
-            {
-              "visibility": "simplified"
+              "visibility": "off"
             }
           ]
         },
         {
-          "featureType": "administrative.province",
+          "elementType": "labels",
           "stylers": [
             {
               "visibility": "off"
@@ -123,32 +120,35 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
           ]
         },
         {
-          "featureType": "water",
-          "elementType": "labels",
+          "elementType": "labels.text",
           "stylers": [
             {
               "visibility": "on"
-            },
-            {
-              "lightness": -25
-            },
-            {
-              "saturation": -100
             }
           ]
         },
         {
-          "featureType": "water",
-          "elementType": "geometry",
+          "elementType": "labels.text.stroke",
           "stylers": [
             {
-              "hue": "#ffff00"
-            },
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
             {
-              "lightness": -25
-            },
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
             {
-              "saturation": -97
+              "visibility": "on"
             }
           ]
         }
@@ -157,6 +157,7 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
 
     //map.setCenter(myLatlng);
 
+    //document.getElementById("map") = map;
     $scope.map = map;
 
     getCurrentLocation();
