@@ -1,7 +1,11 @@
-
+.bar.bar-stable{
+  /*background-color: #CAE5B8;*/
+  background-color: #FAFAFA;
+  background-image: inherit;
+}
 .bar.bar-stable .title{
   color: black;
-  background-color: #f8f8f8;
+  /*background-color: none;*/
   position: fixed;
   margin:0 0;
   font-family: "Gafata";
@@ -9,6 +13,20 @@
   border:none;
   background-size:100%,0;
   background-image: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.containerTab{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.panda{
+  width:15%;
+  height:60%;
+  z-index: 19;
+  padding:3px 0;
+
 }
 
 .content{
@@ -61,7 +79,7 @@
 #map{
   position:relative;
   width:86%;
-  height:34%;
+  height:187PX;
   /*height:50%;*/
   margin: 0 auto 0 auto;
   border-radius:20px;

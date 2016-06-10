@@ -32,6 +32,7 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
     disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
   google.maps.event.addDomListener(window, 'load', function() {
 
     var styles =
@@ -172,8 +173,6 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
       });
     })
   }
-
-  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
   $scope.getLocation = function(){
     getCurrentLocation()
