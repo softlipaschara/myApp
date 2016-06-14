@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -33,18 +33,22 @@
       </div>
 
       <ion-content class="content" ng-controller="MainController">
-        <ion-scroll zooming="true" direction="y" style="width: 100%; height: 100%">
-
+        <ion-scroll zooming="false" direction="y" style="width: 100%; height: 100%">
+      <!--<ion-content scroll="false">-->
 
 
 
           <div class="inputBlock">
-            <label class="item item-input">
-              <span class="input-label">I need</span>
-              <input type="text" class="input">
-            </label>
+            <form>
+              <label class="item item-input">
+                <span class="input-label">I need</span>
+                <input type="text" class="input">
+              </label>
+            </form>
           </div>
 
+      <!--<ion-content class="content" ng-controller="MainController" overflow-scroll="true">-->
+        <!--<ion-scroll zooming="false" direction="y" style="width: 100%; height: 100%">-->
 
 
             <div class="text textMap">
@@ -82,7 +86,7 @@
 
 
         </ion-scroll>
-      </ion-content>
-    </ion-pane>
+      <!--</ion-content>-->
+    </ion-content></ion-pane>
   </body>
 </html>

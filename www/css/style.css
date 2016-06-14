@@ -1,6 +1,6 @@
 .bar.bar-stable{
-  /*background-color: #CAE5B8;*/
-  background-color: #FAFAFA;
+  background-color: #E0F0EE;
+  /*background-color: #FAFAFA;*/
   background-image: inherit;
 }
 .bar.bar-stable .title{
@@ -16,30 +16,29 @@
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.content{
+  /*padding-top: 50px;*/
+  background-color:#E0F0EE;
+  font-family: "Gafata";
+  margin: 0 0;
+  padding:0 0;
+}
 .containerTab{
   display: flex;
   justify-content: center;
   flex-direction: row;
 }
 .panda{
-  width:15%;
-  height:60%;
+  width:11%;
+  height:65%;
   z-index: 19;
   padding:3px 0;
 
 }
-
-.content{
-  /*padding-top: 50px;*/
-  /*background-color: lightgray;*/
-  font-family: "Gafata";
-  margin: 0 0;
-  padding:0 0;
-}
 .inputBlock{
   /*border-bottom: 1px solid #ddd;*/
   padding-bottom: 10px;
-  padding-top: 90px;
+  padding-top: 80px;
 }
 .input-label{
   /*margin-top: 20px;*/
@@ -51,8 +50,9 @@
 
 }
 .item{
-  margin:0 25px;
+  margin: 0 25px;
   border-radius: 25px;
+  border:inherit;
 }
 
 .item-input{
@@ -71,7 +71,7 @@
 }
 .text{
   font-size: 13px;
-  color: dimgrey;
+  color: #393939;
   /*text-align: center;*/
   margin-top: 10px;
   margin-left: 30px;
@@ -83,8 +83,8 @@
   /*height:50%;*/
   margin: 0 auto 0 auto;
   border-radius:20px;
-  /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
-  border:1px solid #ddd;
+  box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);
+  /*border:1px solid #ddd;*/
 
 }
 .containerMap{
@@ -138,7 +138,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 .button.activated{
   border-color: lightyellow;
-  background-color: lightyellow;
+  background-color:#F1AE98;
 }
 .containerPhoto{
   display: flex;
@@ -146,7 +146,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   justify-content: center;
 }
 .photo{
-  width:86%;
+  width:275.2px;
   border-radius: 20px;
 }
 .containerSend{
@@ -155,16 +155,22 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   justify-content: center;
 }
 
-.button.button-light.send{
+.button.button-light.send {
   /*background-color: lightgray;*/
   margin-top: 30px;
   margin-bottom: 30px;
   border-radius: 25px;
   font-family: "Gafata";
-  border: 1px solid #bbb;
+  /*border: 1px solid #bbb;*/
   width:20%;
   font-size: 18px;
   min-height:53px;
   color:black;
-  background-color: white;
+  background-color:#EDCFCF;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.50);
+}
+
+.button.button-light.activated{
+  border-color:transparent;
+  background-color: #E7C5C5;
 }
