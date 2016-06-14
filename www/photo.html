@@ -12,15 +12,21 @@
   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAFetutcE807_2aOwgI7hAPKwG81lknLwo&amp;sensor=true"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
+  <script>
+    function goBack() {
+      window.history.back()
+    }
+  </script>
     <title>Title</title>
 </head>
 <body ng-app="starter">
+
   <ion-content class="content" ng-controller="CameraController">
+    <button class=backButton onclick="goBack()">Back</button>
     <div class="photoBlock">
       <div class="text">
         <p>Take a photo so that people can recognize you.<br/>
-        It can be a rose<i class="em em-rose"></i> , your T-shirt<i class="em em-womans_clothes"></i>,
-          shoes<i class="em em-shoe"></i> etc...</p>
+        It can be a rose, your T-shirt, shoes etc...</p>
       </div>
       <ng-switch on="hasPhoto">
         <div class="containerPhoto">

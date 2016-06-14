@@ -1,7 +1,7 @@
 .bar.bar-stable{
   background-color: #E0F0EE;
   /*background-color: #FAFAFA;*/
-  background-image: inherit;
+  background-image: inherit
 }
 .bar.bar-stable .title{
   color: black;
@@ -81,6 +81,9 @@
   margin-left: 30px;
   max-width: 84%;
 }
+.text.textMap{
+  margin-top: 60px;
+}
 #map{
   position:relative;
   width:86%;
@@ -107,7 +110,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 .photoBlock{
   /*border-top: 1px solid #ddd;*/
-  margin-top: 20px;
+  margin-top: -50px;
 }
 .container{
   display: flex;
@@ -180,4 +183,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .button.button-light.activated{
   border-color:transparent;
   background-color: #E7C5C5;
+}
+.backButton{
+  color: #393939;
+  margin-top: 50px;
+  margin-left: 30px;
 }
