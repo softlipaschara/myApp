@@ -37,8 +37,11 @@
 }
 .inputBlock{
   /*border-bottom: 1px solid #ddd;*/
-  padding-bottom: 10px;
-  margin-top: 200px;
+  padding-bottom: 50px;
+  margin-top: 170px;
+}
+.form{
+  margin-top: 10px;
 }
 .input-label{
   /*margin-top: 20px;*/
@@ -53,6 +56,7 @@
   margin: 0 25px;
   border-radius: 25px;
   border:inherit;
+  line-height: 1.6;
 }
 
 .item-input{
@@ -75,6 +79,7 @@
   /*text-align: center;*/
   margin-top: 120px;
   margin-left: 30px;
+  max-width: 84%;
 }
 #map{
   position:relative;
@@ -117,6 +122,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   background-color: lightyellow;
   width:86%;
   border-radius: 20px;
+  margin-top: 10px;
 
 }
 .buttonCam{
