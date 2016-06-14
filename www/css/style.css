@@ -38,7 +38,7 @@
 .inputBlock{
   /*border-bottom: 1px solid #ddd;*/
   padding-bottom: 10px;
-  padding-top: 80px;
+  margin-top: 200px;
 }
 .input-label{
   /*margin-top: 20px;*/
@@ -73,7 +73,7 @@
   font-size: 13px;
   color: #393939;
   /*text-align: center;*/
-  margin-top: 10px;
+  margin-top: 120px;
   margin-left: 30px;
 }
 #map{
@@ -164,6 +164,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   /*border: 1px solid #bbb;*/
   width:20%;
   font-size: 18px;
+  padding-top: 3px;
   min-height:53px;
   color:black;
   background-color:#EDCFCF;
