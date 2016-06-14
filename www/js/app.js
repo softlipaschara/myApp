@@ -5,6 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
 
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -203,7 +204,15 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
 })
 
 exampleApp.controller('CameraController', function($scope, Camera) {
-
+  $scope.getPhoto = function() {
+    Camera.getPicture(options).then(function(imageURI) {
+      console.log(imageURI);
+      $scope.lastPhoto = imageURI;
+      $scope.hasPhoto = true;
+    }, function(err) {
+      console.err(err);
+    });
+  };
 
 
 })
