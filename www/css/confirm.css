@@ -1,0 +1,11 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.sended{
+  font-size: 18px;
+  font-family: "Gafata";
+  color: #393939;
+  margin-top: 200px;
+}
