@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <script src="cordova.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Gafata" rel="stylesheet" type="text/css">
@@ -17,7 +18,9 @@
   <ion-content class="content" ng-controller="CameraController">
     <div class="photoBlock">
       <div class="text">
-        <p>Take a photo so that people can recognize you:</p>
+        <p>Take a photo so that people can recognize you.<br/>
+        It can be a rose<i class="em em-rose"></i> , your T-shirt<i class="em em-womans_clothes"></i>,
+          shoes<i class="em em-shoe"></i> etc...</p>
       </div>
       <ng-switch on="hasPhoto">
         <div class="containerPhoto">
