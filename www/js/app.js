@@ -47,7 +47,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('confirm', {
       url: '/confirm',
       templateUrl: 'confirm.html',
-      //controller: 'CameraController'
+      controller: 'AnimationController'
     })
     .state('situation', {
     url: '/situation',
@@ -369,5 +369,19 @@ exampleApp.controller('CameraController', function($scope, Camera) {
   };
 
 
+})
+
+exampleApp.controller('AnimationControlloer',function($scope){
+  var ballColor = document.getElementById("ballColor")
+  var shadowColor = document.getElementById("shadowColor")
+
+  setTimeout(function(){
+    ballColor.animate({
+      color:[ "#FF5460", "green" ]
+    })
+    shadowColor.animate({
+      color:[ "#FF5460", "green" ]
+    })
+  }, 5000)
 })
 
