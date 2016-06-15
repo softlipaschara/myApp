@@ -1,37 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
-    <title>Title</title>
+  <title>Title</title>
   <link href="lib/ionic/css/ionic.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <script src="lib/ionic/js/ionic.bundle.js"></script>
   <script src="cordova.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Gafata" rel="stylesheet" type="text/css">
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAFetutcE807_2aOwgI7hAPKwG81lknLwo&amp;sensor=true"></script>
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
-  <script>
-    function goBack() {
-      window.history.back()
-    }
-  </script>
 </head>
 <body ng-app="starter">
+<ion-view title="need">
   <ion-content class="content" ng-controller="MainController">
-    <a class= "backButton" href="index.html"><img class=chevronLeft src="img/back.png"></a>
-    <div class="text textMap">
-      <p>Asking people in the area:</p>
+    <div class="inputBlock">
+      <div class="text">Type what you need here:</div>
+      <form class="form">
+        <label class="item item-input">
+          <span class="input-label">I need</span>
+          <input type="text" class="input">
+        </label>
+      </form>
     </div>
-    <div id="map" data-tap-disabled="true">
-    </div>
-    <div class="gm-style-mtc" style="display:none;">
-    </div>
-    <div class="containerSend">
-      <a class="button button-light send" href="photo.html">Next</a>
-    </div>
+
   </ion-content>
+</ion-view>
 </body>
 </html>
