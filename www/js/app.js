@@ -68,8 +68,148 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
   };
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-  google.maps.event.addDomListener(window, 'load', function() {
+  var getCurrentLocation = function(){
+    GoogleMap.getLocation().then(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
+      });
+    })
+  }
 
+  map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  var styles =
+    [
+      {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+            //"color":"lightyellow"
+          },
+          {
+            "weight": 0.1
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#000000"
+          },
+          {
+            "weight": 0.8
+          }
+        ]
+      },
+      {
+        "featureType": "landscape",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      }
+    ];
+  map.setOptions({styles: styles});
+
+
+  //map.setCenter(myLatlng);
+
+  //document.getElementById("map") = map;
+  $scope.map = map;
+
+  getCurrentLocation();
+  google.maps.event.addDomListener(window, 'load', function() {
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
     var styles =
       [
         {
@@ -200,16 +340,6 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
     getCurrentLocation();
 
   });
-  var getCurrentLocation = function(){
-    GoogleMap.getLocation().then(function(pos){
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        map: map,
-        title: "My Location"
-      });
-    })
-  }
 
   $scope.getLocation = function(){
     getCurrentLocation()
@@ -219,10 +349,10 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
 
 exampleApp.controller('CameraController', function($scope, Camera) {
   var options  = {
-    quality: 75,
+    quality: 100,
     allowEdit : true,
     targetWidth: 320,
-    targetHeight: 160,
+    targetHeight: 320,
     saveToPhotoAlbum: false,
     correctOrientation: true
   };
