@@ -48,7 +48,12 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
       url: '/confirm',
       templateUrl: 'confirm.html',
       //controller: 'CameraController'
-    });
+    })
+    .state('situation', {
+    url: '/situation',
+    templateUrl: 'situation.html',
+    controller: 'MainController'
+  });
   $urlRouterProvider.otherwise('/need');
 });
 
