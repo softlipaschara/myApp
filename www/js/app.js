@@ -6,6 +6,7 @@
 var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
 
 
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,7 +25,34 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
   });
 })
 
-exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
+.config(function($stateProvider, $urlRouterProvider){
+  $stateProvider
+    .state('need', {
+      url: '/need',
+      templateUrl: 'need.html',
+      //controller: 'MainController'
+    })
+
+    .state('map', {
+      url: '/map',
+      templateUrl: 'map.html',
+      controller: 'MainController'
+    })
+
+    .state('photo', {
+      url: '/photo',
+      templateUrl: 'photo.html',
+      controller: 'CameraController'
+    })
+    .state('confirm', {
+      url: '/confirm',
+      templateUrl: 'confirm.html',
+      //controller: 'CameraController'
+    });
+  $urlRouterProvider.otherwise('/need');
+});
+
+exampleApp.controller('MainController', function($scope, GoogleMap) {
 
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
   var mapOptions = {
@@ -181,6 +209,10 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
   $scope.getLocation = function(){
     getCurrentLocation()
   };
+
+})
+
+exampleApp.controller('CameraController', function($scope, Camera) {
   var options  = {
     quality: 75,
     allowEdit : true,
@@ -188,22 +220,9 @@ exampleApp.controller('MainController', function($scope, Camera, GoogleMap) {
     targetHeight: 160,
     saveToPhotoAlbum: false,
     correctOrientation: true
-  }
-
-  $scope.getPhoto = function() {
-    Camera.getPicture(options).then(function(imageURI) {
-      console.log(imageURI);
-      $scope.lastPhoto = imageURI;
-      $scope.hasPhoto = true;
-    }, function(err) {
-      console.err(err);
-    });
   };
 
 
-})
-
-exampleApp.controller('CameraController', function($scope, Camera) {
   $scope.getPhoto = function() {
     Camera.getPicture(options).then(function(imageURI) {
       console.log(imageURI);

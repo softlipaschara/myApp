@@ -5,7 +5,7 @@ angular.module('starter.services', [])
   return {
     getPicture: function(options) {
       var q = $q.defer();
-
+      console.log("get picture called , navigator is", navigator)
       navigator.camera.getPicture(function(result) {
         // Do any magic you need
         q.resolve(result);
