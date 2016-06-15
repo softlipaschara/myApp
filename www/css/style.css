@@ -187,5 +187,14 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .backButton{
   color: #393939;
   margin-top: 50px;
-  margin-left: 30px;
+  margin-left: 20px;
+}
+
+.chevronLeft{
+  width:10%;
+  padding:4px 4px;
+  margin-top: 30px;
+  border-radius: 50%;
+  background-color: lightblue;
+  opacity: 0.8;
 }
