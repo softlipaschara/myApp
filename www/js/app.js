@@ -72,7 +72,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('thankyou', {
       url: '/thankyou',
       templateUrl: 'thankyou.html',
-      controller: 'CameraController'
+      controller: 'ThankyouController'
     })
     .state('see', {
       url: '/see',
@@ -356,6 +356,29 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
   $scope.getLocation = function(){
     getCurrentLocation()
   };
+})
+
+exampleApp.controller('ThankyouController', function($scope, GoogleMap){
+
+  $scope.getAddress = function(){
+
+    var processPosition = function(pos){
+      return GoogleMap.getAddress(pos)
+    }
+
+    var wrongPosition = function(err){
+      alert("some error happened" + err )
+    }
+
+    var processAddress = function(address){
+      var input = document.getElementById("addressInput");
+      input.value = address
+    }
+
+    GoogleMap.getLocation()
+      .then(processPosition, wrongPosition)
+      .then(processAddress, wrongPosition)
+  }
 })
 
 exampleApp.controller('CameraController', function($scope, Camera) {

@@ -19,6 +19,7 @@ angular.module('starter.services', [])
 }])
 
 .factory('GoogleMap', ['$q', function($q) {
+  var geocoder = new google.maps.Geocoder();
 
   return {
     getLocation: function(options) {
@@ -32,7 +33,29 @@ angular.module('starter.services', [])
       }, options);
 
       return q.promise;
+    },
+
+    getAddress : function(position){
+      var q = $q.defer();
+      var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      var request = {
+        latLng: latlng
+      };
+      geocoder.geocode(request, function(data, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (data[0] != null) {
+            q.resolve(data[0].formatted_address);
+          } else {
+            q.reject("No address available");
+          }
+        }else{
+          q.reject(status)
+        }
+      });
+
+      return q.promise;
     }
+
   }
 }])
 

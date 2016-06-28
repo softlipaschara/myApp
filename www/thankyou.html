@@ -47,12 +47,14 @@
     </div>
     <form class="form container" style="margin-left: -10px;margin-top: -50px">
       <label class="item item-input" style="margin-top: 50px; padding-left:30px;">
-        <input type="text" class="input" style="padding-right: 40px;height:40px">
+        <input type="text" class="input" id="addressInput" style="padding-right: 40px;height:40px">
       </label>
-      <img src="img/geolocation.png" style="width:30px;height:30px;margin:60px 20px -9px -65px; z-index: 3;
-      opacity: 1">
+      <!--<button >-->
+        <img src="img/geolocation.png" ng-click="getAddress()" style="width:30px;height:30px;margin:60px 20px -9px -65px; z-index: 3;
+        opacity: 1">
+      <!--</button>-->
     </form>
-    <ng-switch on="hasPhoto">
+    <ng-switch on="hasPhoto" ng-controller="CameraController">
       <div class="text textMap">
         <p style="margin-top: 40px">Recognize me by:</p>
       </div>
