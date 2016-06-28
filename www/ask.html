@@ -9,7 +9,6 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/confirm.css" rel="stylesheet">
   <link href="css/acception.css" rel="stylesheet">
-  <link href="css/helper.css" rel="stylesheet">
   <link rel="stylesheet" href="css/font-awesome.min.css">
 
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -27,42 +26,23 @@
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
 </head>
-<body ng-app="starter"><ion-view title="">
+<body ng-app="starter">
 <ion-view title="">
   <ion-content class="content">
-    <a class= backButton href="#/photo"><img class=chevronLeft src="img/back.png"></a>
-    <a href="#/acception">
-      <div class="container" style="margin-top: 80px;">
-        <div><p class="sended">
-          <p  id="title" style="color:black; font-size: 18px;">Request sended!</p>
-          <!--<br/>-->
-          <p class="fadeInText" style="color:black">We found 3 users around!<br/>
-          Please wait for answer.</p>
-        </p></div>
+    <!--<div class="container" style="margin-top: 40px">-->
+      <!--<img src="img/wave.gif" style="width:102px;height:70px;">-->
+    <!--</div>-->
+      <div class="container" style="margin-top: 120px;">
+        <p class="textAsk" >A lovely neighbor in 200m needs aspirin,<br/>
+            would you like to help?</p>
       </div>
 
-      <!--<div id="ballColor" class="ball"></div>-->
-      <!--<span id="shadowColor" class="shadow"></span>-->
+    <div class="containerCo" style="margin-top: 40px;">
+      <a class="button button-light yes" href="#/thankyou">Yes</a>
+      <a class="button button-light no" href="#/thankyou">No, I'm sorry</a>
+    </div>
 
-      <div id="ripples">
-        <div class="circle">
-        </div>
-        <div class="circle2">
-        </div>
-        <div class="circle3">
-        </div>
-        <div class="circle4">
-        </div>
-      </div>
-      <div class="fadeIn">
-        <div class="points">
-          <div class="point1"></div>
-          <div class="point2"></div>
-          <div class="point3"></div>
-        </div>
-      </div>
 
-    </a>
   </ion-content>
 </ion-view>
 </body>

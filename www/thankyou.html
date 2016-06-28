@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">
+  <title></title>
+
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/confirm.css" rel="stylesheet">
+  <link href="css/acception.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+  <link href="css/ionic.app.css" rel="stylesheet">
+  -->
+  <!-- ionic/angularjs js -->
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <!-- your app's js -->
+  <link href="https://fonts.googleapis.com/css?family=Gafata" rel="stylesheet" type="text/css">
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAFetutcE807_2aOwgI7hAPKwG81lknLwo&amp;sensor=true"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+</head>
+<body ng-app="starter">
+<ion-view title="">
+  <ion-content class="content">
+    <a class= backButton href="#/ask"><img class=chevronLeft src="img/back.png"></a>
+
+    <div class="y" style="margin-top: -30px">
+      <div class="x">
+        <div class="fadeInHeart">
+          <img  src="img/heart.png" style="width:20px;height:17px; margin-top:-10px;
+          margin-left: 85px;">
+        </div>
+      </div>
+    </div>
+    <div class="container fadeInThank" style="margin-top: -25px">
+      <p  style="font-size: 16px;margin-top: 2px;margin-left: 25px">Thanks for helping!</p>
+    </div>
+    <div>
+      <p style="margin-left: 33px;margin-top: 20px">Where to meet:</p>
+    </div>
+    <form class="form container" style="margin-left: -10px;margin-top: -50px">
+      <label class="item item-input" style="margin-top: 50px; padding-left:30px;">
+        <input type="text" class="input" style="padding-right: 40px;height:40px">
+      </label>
+      <img src="img/geolocation.png" style="width:30px;height:30px;margin:60px 20px -9px -65px; z-index: 3;
+      opacity: 1">
+    </form>
+    <ng-switch on="hasPhoto">
+      <div class="text textMap">
+        <p style="margin-top: 40px">Recognize me by:</p>
+      </div>
+      <div class="containerPhoto" >
+        <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo" >
+      </div>
+      <div class="container">
+        <div ng-switch-default="" class="containerCam" style="margin-top: 0px;">
+          <button class="button buttonCam" ng-click="getPhoto()">
+            <img class="cameraIcon" src="./img/camera.png">
+          </button>
+        </div>
+      </div>
+
+    </ng-switch>
+    <div class="containerSend">
+      <a href="#/see" style="margin-top: 18px">
+        <img src="img/sendWhite.png" style="width:48px; height:32px; margin-top: 9px; margin-left: 2px;"></a>
+    </div>
+    <!--<div class="containerSend">-->
+      <!--<div class="buttonShadow buttonShadowMiddle "></div>-->
+    <!--</div>-->
+  </ion-content>
+</ion-view>
+</body>
+</html>

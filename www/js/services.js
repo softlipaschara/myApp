@@ -35,15 +35,7 @@ angular.module('starter.services', [])
     }
   }
 }])
-//function(){
-//   return {
-//     getLocation: function () {
-//       navigator.geolocation.getCurrentPosition(function (pos) {
-//         return pos
-//       });
-//     }
-//   }
-//})
+
 
 /**
  * A simple example service that returns some data.

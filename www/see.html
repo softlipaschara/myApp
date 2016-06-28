@@ -27,42 +27,34 @@
   <script src="js/app.js"></script>
   <script src="js/services.js"></script>
 </head>
-<body ng-app="starter"><ion-view title="">
+<body ng-app="starter">
 <ion-view title="">
   <ion-content class="content">
-    <a class= backButton href="#/photo"><img class=chevronLeft src="img/back.png"></a>
-    <a href="#/acception">
-      <div class="container" style="margin-top: 80px;">
-        <div><p class="sended">
-          <p  id="title" style="color:black; font-size: 18px;">Request sended!</p>
-          <!--<br/>-->
-          <p class="fadeInText" style="color:black">We found 3 users around!<br/>
-          Please wait for answer.</p>
-        </p></div>
+    <a class= "backButton" href="#/thankyou"><img class=chevronLeft src="img/back.png"></a>
+    <div class="container" id="title">
+      <p  style="font-size: 16px">Successfully sended!</p>
+      <img src="img/congrats.png" style="width:48px;height:40px;margin-left:30px;
+          margin-top: -17px;">
+    </div>
+    <div class="container1">
+      <div class="congratsText">
+        <p style="font-size: 14px; margin-top: 20px">This is him/her:</p>
+        <!--<p style="font-size: 14px">He/She left it here</p>-->
       </div>
+    </div>
+    <div class="containerPhoto">
+      <div class="photoFromHimHer"></div>
+    </div>
+    <div class="container3">
+      <img src="img/girl.png" style="width:145px;height:130px;margin-top: -200px;">
+    </div>
+    <div class="container">
+      <a href="#/location">
+        <p class="coming" style="color:black">He/She's coming!</p>
+      </a>
+    </div>
 
-      <!--<div id="ballColor" class="ball"></div>-->
-      <!--<span id="shadowColor" class="shadow"></span>-->
 
-      <div id="ripples">
-        <div class="circle">
-        </div>
-        <div class="circle2">
-        </div>
-        <div class="circle3">
-        </div>
-        <div class="circle4">
-        </div>
-      </div>
-      <div class="fadeIn">
-        <div class="points">
-          <div class="point1"></div>
-          <div class="point2"></div>
-          <div class="point3"></div>
-        </div>
-      </div>
-
-    </a>
   </ion-content>
 </ion-view>
 </body>

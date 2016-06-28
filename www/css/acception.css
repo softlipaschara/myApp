@@ -1,0 +1,87 @@
+.container0{
+  display:  flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+  /*margin-left: 30px;*/
+  /*width:86%;*/
+  /*background-color: lightgray;*/
+}
+.congratsText{
+  font-size: 16px;
+  font-family: "Gafata";
+  color: #393939;
+  width:84%;
+  /*color:#FF5460;*/
+
+}
+.container1{
+  display:  flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 5px;
+}
+.container2{
+  display:  flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.photoFromHimHer{
+  border:1px solid lightgray;
+  border-radius: 20px;
+  width:84%;
+  height:260px;
+  background-color:#F9FBC9;
+}
+
+.meetButton{
+  margin-top: -10px;
+}
+@keyframes bounceInDown {
+  0%, 100%, 60%, 75%, 90% {
+    -webkit-transition-timing-function: cubic-bezier(0.215, .61, .355, 1);
+    transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -3000px, 0);
+    transform: translate3d(0, -3000px, 0)
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0)
+  }
+
+  75% {
+    -webkit-transform: translate3d(0, -10px, 0);
+    transform: translate3d(0, -10px, 0)
+  }
+
+  90% {
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0)
+  }
+
+  100% {
+    -webkit-transform: none;
+    transform: none
+  }
+}
+#title {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: bounceInDown;
+  animation-name: bounceInDown;
+}
+.container3{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

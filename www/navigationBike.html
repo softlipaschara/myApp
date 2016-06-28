@@ -29,29 +29,11 @@
 <!--</head>-->
 <!--<body ng-app="starter">-->
 <ion-view title="">
-  <ion-content class="content">
-    <a class= "backButton" href="#/need"><img class=chevronLeft src="img/back.png"></a>
-    <div class="containerStep2">
-      <div id="dot2"></div>
-      <div id="dot1"></div>
-      <div id="dot3"></div>
-    </div>
-    <div class="text textMap">
-      <p>Asking people in the area:</p>
-    </div>
+  <ion-content class="content" on-swipe-left="onSwipeLeft()" href="#/acception">
+    <a class= backButton href="#/acception"><img class=chevronLeft src="img/back.png"></a>
     <div id="map" data-tap-disabled="true">
     </div>
     <div class="gm-style-mtc" style="display:none;">
-    </div>
-    <div class="containerSend">
-      <a class="button button-light send sendSmall" href="#/photo" style="margin-top: 40px;">
-        <img src="img/location.png" style="width:86px; height:86px; margin-top: -8px;margin-left: -21px; "></a>
-    </div>
-    <div class="containerSend">
-      <div class="buttonShadow buttonShadowSmall"></div>
-    </div>
-    <div class="container">
-      <div id="circle"></div>
     </div>
   </ion-content>
 </ion-view>

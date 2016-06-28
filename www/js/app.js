@@ -49,11 +49,36 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
       templateUrl: 'confirm.html',
       controller: 'AnimationController'
     })
-    .state('situation', {
-    url: '/situation',
-    templateUrl: 'situation.html',
-    controller: 'MainController'
-  });
+    .state('acception', {
+    url: '/acception',
+    templateUrl: 'acception.html',
+    //controller: 'MainController'
+    })
+    .state('navigationWalk', {
+      url: '/navigationWalk',
+      templateUrl: 'navigationWalk.html',
+      controller: 'MainController'
+    })
+    .state('navigationBike', {
+      url: '/navigationBike',
+      templateUrl: 'navigationBike.html',
+      controller: 'MainController'
+    })
+    .state('ask', {
+      url: '/ask',
+      templateUrl: 'ask.html',
+      //controller: 'AnimationController'
+    })
+    .state('thankyou', {
+      url: '/thankyou',
+      templateUrl: 'thankyou.html',
+      controller: 'CameraController'
+    })
+    .state('see', {
+      url: '/see',
+      templateUrl: 'see.html',
+      //controller: 'AnimationController'
+    });
   $urlRouterProvider.otherwise('/need');
 });
 
@@ -78,7 +103,6 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
       });
     })
   }
-
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
   var styles =
     [
@@ -200,13 +224,7 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
       }
     ];
   map.setOptions({styles: styles});
-
-
-  //map.setCenter(myLatlng);
-
-  //document.getElementById("map") = map;
   $scope.map = map;
-
   getCurrentLocation();
   google.maps.event.addDomListener(window, 'load', function() {
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -331,20 +349,13 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
       ];
     map.setOptions({styles: styles});
 
-
-    //map.setCenter(myLatlng);
-
-    //document.getElementById("map") = map;
     $scope.map = map;
 
     getCurrentLocation();
-
   });
-
   $scope.getLocation = function(){
     getCurrentLocation()
   };
-
 })
 
 exampleApp.controller('CameraController', function($scope, Camera) {
@@ -371,17 +382,17 @@ exampleApp.controller('CameraController', function($scope, Camera) {
 
 })
 
-exampleApp.controller('AnimationControlloer',function($scope){
+exampleApp.controller('AnimationController',function($scope){
   var ballColor = document.getElementById("ballColor")
   var shadowColor = document.getElementById("shadowColor")
 
-  setTimeout(function(){
+  $scope.setTimeout = function(){
     ballColor.animate({
       color:[ "#FF5460", "green" ]
-    })
+    }, 1000)
     shadowColor.animate({
       color:[ "#FF5460", "green" ]
-    })
-  }, 5000)
+    }, 1000)
+  }, 2000
 })
 

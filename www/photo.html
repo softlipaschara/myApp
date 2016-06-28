@@ -1,9 +1,43 @@
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+  <!--<meta charset="utf-8">-->
+  <!--<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi">-->
+  <!--<title></title>-->
+
+  <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
+  <!--<link href="css/style.css" rel="stylesheet">-->
+  <!--<link href="css/confirm.css" rel="stylesheet">-->
+  <!--<link href="css/acception.css" rel="stylesheet">-->
+  <!--<link href="css/helper.css" rel="stylesheet">-->
+  <!--<link rel="stylesheet" href="css/font-awesome.min.css">-->
+
+  <!--&lt;!&ndash; IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above-->
+  <!--<link href="css/ionic.app.css" rel="stylesheet">-->
+  <!--&ndash;&gt;-->
+  <!--&lt;!&ndash; ionic/angularjs js &ndash;&gt;-->
+  <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
+
+  <!--&lt;!&ndash; cordova script (this will be a 404 during development) &ndash;&gt;-->
+  <!--<script src="cordova.js"></script>-->
+
+  <!--&lt;!&ndash; your app's js &ndash;&gt;-->
+  <!--<link href="https://fonts.googleapis.com/css?family=Gafata" rel="stylesheet" type="text/css">-->
+  <!--<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAFetutcE807_2aOwgI7hAPKwG81lknLwo&amp;sensor=true"></script>-->
+  <!--<script src="js/app.js"></script>-->
+  <!--<script src="js/services.js"></script>-->
+<!--</head>-->
+<!--<body ng-app="starter">-->
 <ion-view title="">
   <ion-content class="content">
     <a class="backButton" href="#/map"><img class=chevronLeft src="img/back.png"></a>
-
+    <div class="containerStep2">
+      <div id="dot2"></div>
+      <div id="dot3"></div>
+      <div id="dot1"></div>
+    </div>
     <div class="photoBlock">
-      <div class="text">
+      <div class="text textMap" style="margin-top: 20px;">
         <p>Recognize me by:</p>
       </div>
       <ng-switch on="hasPhoto">
@@ -11,7 +45,7 @@
           <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
         </div>
         <div class="container">
-          <div ng-switch-default="" class="containerCam">
+          <div ng-switch-default="" class="containerCam" style="margin-top: 0">
             <button class="button buttonCam" ng-click="getPhoto()">
               <img class="cameraIcon" src="./img/camera.png">
             </button>
@@ -20,8 +54,13 @@
       </ng-switch>
     </div>
     <div class="containerSend">
-      <a class="button button-light send" href="#/confirm">Ji&#xE8;</a>
+      <a class="button button-light send sendMiddle " href="#/confirm" style="margin-top: 40px">
+        <img src="img/send.png" style="width:48px; height:32px; margin-top: 19px; margin-left: 2px;"></a>
+    </div>
+    <div class="containerSend">
+      <div class="buttonShadow buttonShadowMiddle "></div>
     </div>
   </ion-content>
 </ion-view>
-
+<!--</body>-->
+<!--</html>-->
