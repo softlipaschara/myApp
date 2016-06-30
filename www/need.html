@@ -38,7 +38,6 @@
 
     </div>
       <div class="inputBlock">
-        <!--<div class="text">Type what you need here:</div>-->
         <div class="textNeed"><p>Type what you need here:</p></div>
         <form class="form">
           <label class="item item-input">
@@ -49,19 +48,23 @@
                 <div id="bubble3"></div>
               </div>
             </span>
-            <input type="text" class="input inputAfter">
+            <input type="text" class="input inputAfter" onclick="showDiv(),vanishDiv()">
+
           </label>
+          <img src="img/triangle.png" class="triangle">
         </form>
       </div>
 
+      <img src="img/need.png" class="shoutImage" id="buttonVanish" >
 
-      <div class="containerSend">
+      <div class="container" id="buttonAppear" style="display:none">
         <!--<a class="button button-light send" href="#/map">Now</a>-->
-        <a class="button button-light send" href="#/map">
-          <img src="img/need.png" style="width:86px; height:86px; margin-left: -13px; margin-top:-1px;"></a>
-
+        <a href="#/map">
+          <div class="container">
+            <img src="img/location.png" class="locationButton"></a>
+          </div>
       </div>
-      <div class="containerSend">
+      <div class="container">
         <!--<div class="buttonShadow"></div>-->
       </div>
 

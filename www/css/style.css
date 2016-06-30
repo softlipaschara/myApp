@@ -89,6 +89,19 @@
   font-size: 14px;
   /*color:white;*/
 }
+.triangle{
+  width:31px;
+  height:26px;
+  margin-left: 67%;
+  margin-top: -4px;
+}
+.shoutImage{
+  width:57px;
+  height:57px;
+  margin-left:67%;
+  margin-top: -40px;
+  animation:shake 2.5s infinite;
+}
 .text.textMap{
   margin-top: -20px;
   z-index: 30;
@@ -480,7 +493,7 @@ a{
 #bubble1,#bubble2,#bubble3{
   width:10px;
   height:10px;
-  background-color: grey;
+  background-color: lightgray;
   border-radius: 50%;
   transform-origin:50% 100%;
   animation:pop 1s 1;
@@ -520,6 +533,59 @@ a{
   z-index: 5;
   margin-left:60px
 }
+.bubbles1{
+  margin-top: 10px;
+  margin-left: 15px;
+}
 .input.inputAfter{
   margin-left: -40px;
+}
+.input.inputAfter1{
+  margin-left: -20px;
+}
+.fadeInOut{
+  animation:fadeInOut 4s 1;
+  animation-iteration-count: 1;
+  opacity:0;
+  /*animation-delay: 2s;*/
+}
+@keyframes fadeInOut {
+  0%{opacity:0}
+  5%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0}
+}
+.locationButton{
+  width:79px;
+  height:79px;
+  margin-top: 88px;
+  /*animation:buttonAppear 1s;*/
+  /*animation-iteration-count: 1;*/
+}
+@keyframes buttonAppear {
+  0% {
+    visibility: hidden;
+  }
+
+  25% {
+    visibility: hidden;
+  }
+
+  50% {
+    visibility: hidden;
+  }
+
+  75% {
+    visibility: visible;
+
+    transform: scale(1.2);
+    /*border-radius: 100%;*/
+    width: 48px;
+    height: 48px;
+    color: transparent;
+  }
+
+  100% {
+    visibility: visible;
+  }
 }

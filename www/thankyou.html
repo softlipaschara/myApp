@@ -48,7 +48,12 @@
     <div class="addressInputContainer">
       <form class="form container">
         <label class="item item-input labelLength" >
-          <input type="text" class="input" id="addressInput">
+          <div class=" container fadeOut bubbles1">
+            <div id="bubble1"></div>
+            <div id="bubble2"></div>
+            <div id="bubble3"></div>
+          </div>
+          <input type="text" class="input inputAfter1" id="addressInput">
         </label>
         <img class="geoLocationButton" src="img/geolocation.png" ng-click="getAddress()">
       </form>

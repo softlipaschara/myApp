@@ -419,3 +419,9 @@ exampleApp.controller('AnimationController',function($scope){
   }, 2000
 })
 
+function showDiv() {
+  document.getElementById('buttonAppear').style.display = "block";
+}
+function vanishDiv() {
+  document.getElementById('buttonVanish').style.display= "none";
+}
