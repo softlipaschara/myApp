@@ -128,14 +128,26 @@
   height:450PX;
   /*height:568px;*/
   /*height:50%;*/
-  margin: 20px auto 0 auto;
+  margin: -10px auto 0 auto;
   /*border-radius:20px;*/
   /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
   /*border:1px solid #ddd;*/
   /*margin-top: -120px;*/
   border-radius: 30px;
 }
-
+#map2{
+  position:relative;
+  width:86%;
+  height:450PX;
+  /*height:568px;*/
+  /*height:50%;*/
+  margin: -10px auto 0 auto;
+  /*border-radius:20px;*/
+  /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
+  /*border:1px solid #ddd;*/
+  /*margin-top: -120px;*/
+  border-radius: 30px;
+}
 
 #mapFull{
   position:relative;
@@ -622,4 +634,41 @@ a{
   width:68px;
   height:50px;
   margin-top: 23px;
+}
+.walk{
+  width:24px;
+  height:40px;
+  margin:15px 15px;
+}
+.bike{
+  width:49px;
+  height:30px;
+  margin:22px 15px
+}
+.walk1{
+  width:62px;
+  height:54px;
+  /*margin:0 10px;*/
+
+}
+.bike1{
+  width:39px;
+  height:24px;
+  margin:0 10px;
+}
+.walk2{
+  width:19px;
+  height:31px;
+  margin:0 10px;
+}
+.bike2{
+  width:62px;
+  height:54px;
+}
+.containerIcon{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: -40px;
 }

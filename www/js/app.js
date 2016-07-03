@@ -61,7 +61,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('navigationBike', {
       url: '/navigationBike',
       templateUrl: 'navigationBike.html',
-      controller: 'MainController1'
+      controller: 'MainController2'
     })
     .state('ask', {
       url: '/ask',
@@ -595,6 +595,282 @@ exampleApp.controller('MainController1', function($scope, GoogleMap) {
   getCurrentLocation();
   google.maps.event.addDomListener(window, 'load', function() {
     map = new google.maps.Map(document.getElementById("map1"), mapOptions);
+    var styles =
+      [
+        {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+              //"color":"lightyellow"
+            },
+            {
+              "weight": 0.1
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "weight": 0.8
+            }
+          ]
+        },
+        {
+          "featureType": "landscape",
+          "stylers": [
+            {
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        }
+      ];
+    map.setOptions({styles: styles});
+
+    $scope.map = map;
+
+    getCurrentLocation();
+  });
+  $scope.getLocation = function(){
+    getCurrentLocation()
+  };
+})
+
+exampleApp.controller('MainController2', function($scope, GoogleMap) {
+
+  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 15,
+    disableDefaultUI: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map2"), mapOptions);
+
+  var getCurrentLocation = function(){
+    GoogleMap.getLocation().then(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
+      });
+    })
+  }
+  map = new google.maps.Map(document.getElementById("map2"), mapOptions);
+  var styles =
+    [
+      {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+            //"color":"lightyellow"
+          },
+          {
+            "weight": 0.1
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#000000"
+          },
+          {
+            "weight": 0.8
+          }
+        ]
+      },
+      {
+        "featureType": "landscape",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      }
+    ];
+  map.setOptions({styles: styles});
+  $scope.map = map;
+  getCurrentLocation();
+  google.maps.event.addDomListener(window, 'load', function() {
+    map = new google.maps.Map(document.getElementById("map2"), mapOptions);
     var styles =
       [
         {
