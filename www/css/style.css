@@ -121,6 +121,7 @@
   /*border:1px solid #ddd;*/
   /*margin-top: -120px;*/
   border-radius: 50%;
+  margin-bottom: 40px;
 }
 #map1{
   position:relative;
@@ -142,6 +143,19 @@
   /*height:568px;*/
   /*height:50%;*/
   margin: -10px auto 0 auto;
+  /*border-radius:20px;*/
+  /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
+  /*border:1px solid #ddd;*/
+  /*margin-top: -120px;*/
+  border-radius: 30px;
+}
+#map3{
+  position:relative;
+  width:86%;
+  height:380PX;
+  /*height:568px;*/
+  /*height:50%;*/
+  margin: 10px auto 0 auto;
   /*border-radius:20px;*/
   /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
   /*border:1px solid #ddd;*/
@@ -341,7 +355,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   border-radius: 50%;
   opacity: 0.2;
   background-color: grey;
-  margin-top: -355px;
+  margin-top: -291px;
   animation-name: circle;
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -623,7 +637,7 @@ a{
 .takePhotoButton{
   width:68px;
   height:55px;
-  margin-top: 40px;
+  /*margin-top: 40px;*/
 }
 .broadcasting{
   width:68px;
@@ -671,4 +685,14 @@ a{
   justify-content: center;
   align-items: center;
   margin-top: -40px;
+}
+.textMap.arrive{
+  margin-top: 30px;
+  font-size: 16px;
+}
+.smile{
+  width:18px;
+  height:16px;
+  margin-bottom: 10px;
+  margin-top: 20px;
 }
