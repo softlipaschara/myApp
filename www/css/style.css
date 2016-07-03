@@ -100,11 +100,14 @@
   height:57px;
   margin-left:67%;
   margin-top: -40px;
-  animation:shake 2.5s infinite;
+  background-color: #FF8156;
+  border-radius: 50%;
+  /*animation:shake 2.5s infinite;*/
 }
 .text.textMap{
   margin-top: -20px;
   z-index: 30;
+  margin-bottom: 20px;
 }
 #map{
   position:relative;
@@ -119,6 +122,20 @@
   /*margin-top: -120px;*/
   border-radius: 50%;
 }
+#map1{
+  position:relative;
+  width:86%;
+  height:450PX;
+  /*height:568px;*/
+  /*height:50%;*/
+  margin: 20px auto 0 auto;
+  /*border-radius:20px;*/
+  /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
+  /*border:1px solid #ddd;*/
+  /*margin-top: -120px;*/
+  border-radius: 30px;
+}
+
 
 #mapFull{
   position:relative;
@@ -157,9 +174,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   justify-content: center;
   background-color: white;
   width:84%;
-  height:260px;
+  height:262px;
   border-radius: 20px;
-  margin-top: -70px;
+  /*margin-top: -70px;*/
 
 }
 .buttonCam{
@@ -175,8 +192,8 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 .cameraIcon{
   /*background: white;*/
   width:100%;
-  margin-top: 60px;
-  padding-bottom: 58px;
+  margin-top: 100px;
+  /*padding-bottom: 58px;*/
 
 }
 .button.activated{
@@ -185,9 +202,10 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 .photo{
-  width:275.2px;
+  /*width:275.2px;*/
+  width:84%;
   border-radius: 20px;
-  margin-bottom: -90px ;
+  /*margin-bottom: -2px ;*/
 }
 .containerSend{
   display: flex;
@@ -311,7 +329,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   border-radius: 50%;
   opacity: 0.2;
   background-color: grey;
-  margin-top: -377px;
+  margin-top: -355px;
   animation-name: circle;
   animation-duration: 3s;
   animation-iteration-count: infinite;
@@ -588,4 +606,20 @@ a{
   100% {
     visibility: visible;
   }
+}
+
+.takePhotoButton{
+  width:68px;
+  height:55px;
+  margin-top: 40px;
+}
+.broadcasting{
+  width:68px;
+  height:50px;
+  margin-top: 48px;
+}
+.broadcasting1{
+  width:68px;
+  height:50px;
+  margin-top: 23px;
 }

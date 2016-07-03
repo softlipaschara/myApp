@@ -58,29 +58,52 @@
         <img class="geoLocationButton" src="img/geolocation.png" ng-click="getAddress()">
       </form>
     </div>
-
-    <ng-switch on="hasPhoto" ng-controller="CameraController">
-      <div class="text textMap">
-        <p style="margin-top: 40px">Recognize me by:</p>
-      </div>
-      <div class="container" >
-        <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo" >
-      </div>
-      <div class="container">
-        <div ng-switch-default="" class="containerCam" style="margin-top: 0">
-          <button class="button buttonCam" ng-click="getPhoto()">
-            <img class="cameraIcon" src="./img/camera.png">
-          </button>
-        </div>
-      </div>
-    </ng-switch>
-
-    <div class="containerSend">
-      <a href="#/see" style="margin-top: 18px">
-        <img src="img/sendWhite.png" style="width:48px; height:32px; margin-top: 9px; margin-left: 2px;"></a>
-    </div>
-    <!--<div class="containerSend">-->
-      <!--<div class="buttonShadow buttonShadowMiddle "></div>-->
+    <!--<div class="text textMap" style="margin-bottom:0">-->
+      <!--<p style="margin-top: 40px">Recognize me by:</p>-->
     <!--</div>-->
+    <!--<ng-switch on="hasPhoto" ng-controller="CameraController">-->
+      <!--<div class="container" >-->
+        <!--<img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo" >-->
+      <!--</div>-->
+      <!--<div class="container">-->
+        <!--<div ng-switch-default="" class="containerCam" style="margin-top: 0">-->
+          <!--<div class="buttonCam" ng-click="getPhoto()" onclick="showBroadcast()">-->
+            <!--<img class="cameraIcon" src="./img/camera.png">-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</ng-switch>-->
+
+    <!--<div class="container" id="broadcastButton" style="display:none">-->
+      <!--<a href="#/see">-->
+        <!--<div class="container">-->
+          <!--<img src="img/broadcasting.gif" class="broadcasting">-->
+        <!--</div>-->
+      <!--</a>-->
+    <div class="photoBlock">
+      <div class="text textMap" style="margin-top: 10px;margin-bottom: 0">
+        <p>Recognize me by:</p>
+      </div>
+      <ng-switch on="hasPhoto" ng-controller="CameraController">
+        <div class="container">
+          <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+        </div>
+        <div class="container">
+          <div ng-switch-default="" class="containerCam" style="margin-top: 0">
+            <div class="buttonCam" ng-click="getPhoto()" onclick="showBroadcast1()">
+              <img class="cameraIcon" src="./img/camera.png">
+            </div>
+          </div>
+        </div>
+      </ng-switch>
+    </div>
+    <div class="container" id="broadcastButton1" style="display:none">
+      <a  href="#/see">
+        <div class="container">
+          <img class="broadcasting1" src="img/broadcasting.png">
+        </div>
+      </a>
+    </div>
+    </div>
   </ion-content>
 </ion-view>

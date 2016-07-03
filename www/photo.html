@@ -37,7 +37,7 @@
       <div id="dot1"></div>
     </div>
     <div class="photoBlock">
-      <div class="text textMap" style="margin-top: 20px;">
+      <div class="text textMap" style="margin-top: 50px;">
         <p>Recognize me by:</p>
       </div>
       <ng-switch on="hasPhoto">
@@ -46,19 +46,19 @@
         </div>
         <div class="container">
           <div ng-switch-default="" class="containerCam" style="margin-top: 0">
-            <button class="button buttonCam" ng-click="getPhoto()">
+            <div class="buttonCam" ng-click="getPhoto()" onclick="showBroadcast()">
               <img class="cameraIcon" src="./img/camera.png">
-            </button>
+            </div>
           </div>
         </div>
       </ng-switch>
     </div>
-    <div class="containerSend">
-      <a class="button button-light send sendMiddle " href="#/confirm" style="margin-top: 40px">
-        <img src="img/send.png" style="width:48px; height:32px; margin-top: 19px; margin-left: 2px;"></a>
-    </div>
-    <div class="containerSend">
-      <div class="buttonShadow buttonShadowMiddle "></div>
+    <div class="container" id="broadcastButton" style="display:none">
+      <a  href="#/confirm">
+        <div class="container">
+          <img class="broadcasting" src="img/broadcasting.png">
+        </div>
+      </a>
     </div>
   </ion-content>
 </ion-view>

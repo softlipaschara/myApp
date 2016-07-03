@@ -47,27 +47,25 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('confirm', {
       url: '/confirm',
       templateUrl: 'confirm.html',
-      controller: 'AnimationController'
+      //controller: 'AnimationController'
     })
     .state('acception', {
     url: '/acception',
     templateUrl: 'acception.html',
-    //controller: 'MainController'
     })
     .state('navigationWalk', {
       url: '/navigationWalk',
       templateUrl: 'navigationWalk.html',
-      controller: 'MainController'
+      controller: 'MainController1'
     })
     .state('navigationBike', {
       url: '/navigationBike',
       templateUrl: 'navigationBike.html',
-      controller: 'MainController'
+      controller: 'MainController1'
     })
     .state('ask', {
       url: '/ask',
       templateUrl: 'ask.html',
-      //controller: 'AnimationController'
     })
     .state('thankyou', {
       url: '/thankyou',
@@ -77,7 +75,6 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('see', {
       url: '/see',
       templateUrl: 'see.html',
-      //controller: 'AnimationController'
     });
   $urlRouterProvider.otherwise('/need');
 });
@@ -405,18 +402,327 @@ exampleApp.controller('CameraController', function($scope, Camera) {
 
 })
 
-exampleApp.controller('AnimationController',function($scope){
-  var ballColor = document.getElementById("ballColor")
-  var shadowColor = document.getElementById("shadowColor")
 
-  $scope.setTimeout = function(){
-    ballColor.animate({
-      color:[ "#FF5460", "green" ]
-    }, 1000)
-    shadowColor.animate({
-      color:[ "#FF5460", "green" ]
-    }, 1000)
-  }, 2000
+exampleApp.controller('NavigationController',function($scope, GoogleMap){
+
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  directionsDisplay.setMap(map);
+
+  var location = getLocationFake();
+
+  function calculateAndDisplayRoute() {
+    directionsService.route({
+      origin:new google.maps.LatLng(52.558040,13.439400),
+      destination:new google.maps.LatLng(52.557956, 13.442910),
+      travelMode: google.maps.TravelMode.WALK
+    }, function(response, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(response);
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+  }
+
+  var request = {
+
+  };
+})
+
+function getPushNotification(){
+  return{
+     request : "aspirin",
+     distance : "50m"
+  }
+
+}
+
+
+function getLocationFake(){
+
+  return {
+    latitude : 52.557956,
+    longitude : 13.442910,
+    name : "yang",
+    age: 21,
+  }
+}
+
+exampleApp.controller('MainController1', function($scope, GoogleMap) {
+
+  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 15,
+    disableDefaultUI: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var map = new google.maps.Map(document.getElementById("map1"), mapOptions);
+
+  var getCurrentLocation = function(){
+    GoogleMap.getLocation().then(function(pos){
+      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+      var myLocation = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        map: map,
+        title: "My Location"
+      });
+    })
+  }
+  map = new google.maps.Map(document.getElementById("map1"), mapOptions);
+  var styles =
+    [
+      {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "administrative",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+            //"color":"lightyellow"
+          },
+          {
+            "weight": 0.1
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "color": "#000000"
+          },
+          {
+            "weight": 0.8
+          }
+        ]
+      },
+      {
+        "featureType": "landscape",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [
+          {
+            "color": "#ffffff"
+            //"color":"lightyellow"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "color": "#000000"
+          }
+        ]
+      },
+      {
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "on"
+          }
+        ]
+      }
+    ];
+  map.setOptions({styles: styles});
+  $scope.map = map;
+  getCurrentLocation();
+  google.maps.event.addDomListener(window, 'load', function() {
+    map = new google.maps.Map(document.getElementById("map1"), mapOptions);
+    var styles =
+      [
+        {
+          "featureType": "road",
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "featureType": "poi",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "administrative",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+              //"color":"lightyellow"
+            },
+            {
+              "weight": 0.1
+            }
+          ]
+        },
+        {
+          "featureType": "road",
+          "elementType": "geometry.stroke",
+          "stylers": [
+            {
+              "color": "#000000"
+            },
+            {
+              "weight": 0.8
+            }
+          ]
+        },
+        {
+          "featureType": "landscape",
+          "stylers": [
+            {
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "featureType": "water",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "featureType": "transit",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels",
+          "stylers": [
+            {
+              "visibility": "off"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.stroke",
+          "stylers": [
+            {
+              "color": "#ffffff"
+              //"color":"lightyellow"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.text.fill",
+          "stylers": [
+            {
+              "color": "#000000"
+            }
+          ]
+        },
+        {
+          "elementType": "labels.icon",
+          "stylers": [
+            {
+              "visibility": "on"
+            }
+          ]
+        }
+      ];
+    map.setOptions({styles: styles});
+
+    $scope.map = map;
+
+    getCurrentLocation();
+  });
+  $scope.getLocation = function(){
+    getCurrentLocation()
+  };
 })
 
 function showDiv() {
@@ -424,4 +730,10 @@ function showDiv() {
 }
 function vanishDiv() {
   document.getElementById('buttonVanish').style.display= "none";
+}
+function showBroadcast() {
+  document.getElementById('broadcastButton').style.display = "block";
+}
+function showBroadcast1() {
+  document.getElementById('broadcastButton1').style.display = "block";
 }
