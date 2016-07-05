@@ -83,4 +83,8 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
-});
+})
+
+.factory('mySocket', function (socketFactory) {
+  return socketFactory();
+});;

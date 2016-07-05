@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
+var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'btford.socket-io'])
 
 
 
@@ -83,7 +83,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
     .state('coming', {
       url: '/coming',
       templateUrl: 'coming.html',
-      controller: 'MainController3'
+      controller: 'MainControllerComing'
     });
   $urlRouterProvider.otherwise('/need');
 });
@@ -287,7 +287,7 @@ exampleApp.controller('MainController2', function($scope, GoogleMap) {
 
 
 
-exampleApp.controller('MainController3', function($scope, GoogleMap) {
+exampleApp.controller('MainControllerComing', function($scope, GoogleMap) {
 
   var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
   var mapOptions = {

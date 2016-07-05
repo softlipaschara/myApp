@@ -5694,6 +5694,7 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
  * --------------------------------------------------
  */
 .item {
+  border-color: #ddd;
   background-color: #fff;
   color: #444;
   position: relative;
@@ -5701,9 +5702,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   display: block;
   margin: -1px;
   padding: 16px;
-  border: 1px solid #ddd;
-  border-radius:25px;
-  margin:0 20px;
+  border-width: 1px;
+  border-style: solid;
   font-size: 16px; }
   .item h2 {
     margin: 0 0 2px 0;
@@ -7735,12 +7735,12 @@ input[type="search"],
 input[type="tel"],
 input[type="color"] {
   display: block;
-  padding-top: 1px;
+  padding-top: 2px;
   padding-left: 0;
   height: 34px;
   color: #111;
   vertical-align: middle;
-  font-size: 20px;
+  font-size: 14px;
   line-height: 16px; }
 
 .platform-ios input[type="datetime-local"],
