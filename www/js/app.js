@@ -95,9 +95,16 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
     center: myLatlng,
     zoom: 15,
     disableDefaultUI: true,
+    scrollwheel:  false,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+
+  //var mapEl = document.getElementById("map");
+  var circle = document.getElementById("circle");
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  //onGesture("tap", function(event){
+  //  console.log("tap event is" , event)
+  //}, mapEl);
 
   var getCurrentLocation = function(){
     GoogleMap.getLocation().then(function(pos){
@@ -229,7 +236,7 @@ exampleApp.controller('MainController', function($scope, GoogleMap) {
         ]
       }
     ];
-  map.setOptions({styles: styles});
+  map.setOptions({styles: styles,draggable: false});
   $scope.map = map;
   getCurrentLocation();
   google.maps.event.addDomListener(window, 'load', function() {
@@ -1300,8 +1307,8 @@ function vanishDiv() {
 function showBroadcast() {
   document.getElementById('broadcastButton').style.display = "block";
 }
-function showBroadcast1() {
-  document.getElementById('broadcastButton1').style.display = "block";
+function showSend() {
+  document.getElementById('sendButton').style.display = "block";
 }
 function showPhoto() {
   document.getElementById('photoButton').style.display = "block";
