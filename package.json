@@ -16,7 +16,15 @@
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
   },
-  "cordovaPlugins": [],
+  "cordovaPlugins": [
+    {
+      "variables": {
+        "SENDER_ID": "1234567"
+      },
+      "locator": "phonegap-plugin-push",
+      "id": "phonegap-plugin-push"
+    }
+  ],
   "cordovaPlatforms": [
     "android"
   ]

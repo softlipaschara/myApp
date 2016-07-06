@@ -85,6 +85,51 @@ angular.module('starter.services', [])
   }
 })
 
+.factory('share', function($http, localStorageService){
+
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+
+  var tmp = {
+    requestLocation : {latitude : 37.3000, longitude : -120.4833},
+    token : localStorageService.get("token"),
+    range : 5,
+
+    setLocation : function(latitude, longitude){
+      if(!isNumeric(latitude) || !isNumeric(longitude))
+        return;
+
+      if(latitude >90 || latitude < -90)
+        return;
+
+      if(longitude >90 || longitude < -90)
+        return;
+
+      this.requestLocation = {
+        longitude : longitude,
+        latitude : latitude
+      }
+    },
+    isNumeric : isNumeric,
+    setToken : function(token){
+      this.token = token
+    },
+    setRange : function(range){
+      if(isNumeric(range))
+        this.range = range
+    },
+    getRequest : function(){
+
+    }
+  };
+
+  return tmp
+})
+
 .factory('mySocket', function (socketFactory) {
-  return socketFactory();
+  return socketFactory({
+    ioSocket: io.connect('http://localhost:3031')
+  });
 });;
