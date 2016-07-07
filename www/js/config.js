@@ -1,7 +1,7 @@
 /**
  * Created by hanwencheng on 7/5/16.
  */
-var apiHost = 'localhost:3031';
+var apiHost = '52.28.235.180:3031';
 var globalConfig = {
   mapStyle : [
     {

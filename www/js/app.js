@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalStorageModule', 'btford.socket-io']
+var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'starter.services', 'LocalStorageModule', 'btford.socket-io']
   )
 
 .run(function($ionicPlatform) {
@@ -11,7 +11,6 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalS
   var isAndroid = $ionicPlatform.is("android");
 
   $ionicPlatform.ready(function() {
-
 
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -37,7 +36,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalS
     .state('need', {
       url: '/need',
       templateUrl: 'need.html',
-      //controller: 'MainController'
+      controller: 'StartController'
     })
 
     .state('map', {
@@ -57,13 +56,14 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalS
       controller: 'ConfirmController'
     })
     .state('acception', {
-    url: '/acception',
-    templateUrl: 'acception.html',
+      url: '/acception',
+      templateUrl: 'acception.html',
+      controller : 'AcceptionController'
     })
     .state('navigationWalk', {
       url: '/navigationWalk',
       templateUrl: 'navigationWalk.html',
-      controller: 'MainController1'
+      controller: 'NavigationController'
     })
     .state('navigationBike', {
       url: '/navigationBike',
@@ -73,6 +73,7 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalS
     .state('ask', {
       url: '/ask',
       templateUrl: 'ask.html',
+      controller: 'AskController',
     })
     .state('anyway', {
       url: '/anyway',
@@ -86,13 +87,48 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services', 'LocalS
     .state('see', {
       url: '/see',
       templateUrl: 'see.html',
+      controller : 'SeeController'
     })
     .state('coming', {
       url: '/coming',
       templateUrl: 'coming.html',
-      controller: 'MainControllerComing'
+      controller: 'ComingController'
     });
   $urlRouterProvider.otherwise('/need');
+});
+
+exampleApp.controller('StartController', function($scope, $state, GoogleMap, localStorageService, mySocket, share, $http) {
+  // create the token if there is not
+  if(!share.token) {
+    var tokenString = share.token == null ? "" : "/" + share.token;
+    var url = "http://" + apiHost + "/createToken" + tokenString;
+
+    $http.get(url).then(function (response) {
+      var createdId = response.data.data.uuid;
+      console.log('create user token', createdId);
+      share.setToken(createdId)
+      localStorageService.set("token", createdId);
+    }, function (err) {
+      alert("error in create token from server");
+    });
+  }
+
+  console.log('start with token:' , share.token);
+
+  mySocket.on("askHelp", function(data){
+    var isFound = data.target.some(function(item){
+      if(item.token == share.token){
+        share.setAsk({
+          asker : data.asker,
+          need : data.need,
+          distance : item.distance
+        });
+      }
+    });
+    if(isFound){
+      $state.go("ask")
+    }
+  });
 });
 
 exampleApp.controller('MainController', function($scope, GoogleMap, localStorageService, share, $http) {
@@ -108,44 +144,33 @@ exampleApp.controller('MainController', function($scope, GoogleMap, localStorage
   var circle = document.getElementById("circle");
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-  var tokenString = share.token == null ? "" : "/" + share.token;
-  var url = "http://" + apiHost + "/createToken"  + tokenString;
-
-  $http.get(url).then(function(response){
-    var createdId = response.data.data.uuid;
-    share.setToken(createdId)
-  }, function(err){
-    alert("error in create token from server" );
-  });
-
   var getCurrentLocation = function(){
-    GoogleMap.getLocation().then(function(pos){
+
+    function saveLocation(pos){
       map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      // store the current location for request
       share.setLocation(pos.coords.latitude, pos.coords.longitude);
+      return GoogleMap.saveLocation(share.location, share.token)
+    }
 
-      var url = "http://" + apiHost + "/saveLocation" + "/" + share.token
-      var location = {
-        latitude  : pos.coords.latitude * Math.pow(10,6),
-        longitude : pos.coords.longitude * Math.pow(10,6)
-      }
-      $http.get(url, {params: location}).then(function(response){
-        console.log("SUCCESS update the location" , response.data);
-      }, function(err){
-        console.log("ERROR" , err.toString());
-      });
-
+    function processResult(result){
+      var location = result.data.data.location
+      console.log("save location successful with result " , result)
       var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+        position: new google.maps.LatLng(location.latitude, location.longitude),
         map: map,
         title: "My Location"
       });
-    })
+    }
+
+    GoogleMap.getLocation()
+      .then(saveLocation)
+      .then(processResult)
   };
 
   map = new google.maps.Map(document.getElementById("map"), mapOptions);
   var styles = globalConfig.mapStyle;
   map.setOptions({styles: styles, draggable: false});
+
   $scope.map = map;
   getCurrentLocation();
 
@@ -154,46 +179,86 @@ exampleApp.controller('MainController', function($scope, GoogleMap, localStorage
   };
 });
 
-exampleApp.controller('ConfirmController', function($scope, $http, share){
+exampleApp.controller('AskController', function($scope, $state, share, mySocket){
+  var request = share.ask;
+  $scope.need = "some people need help, but we don't know what he/she need";
+  if(request.need != null && request.need != null){
+    $scope.need = "A lovely neighbor in " + request.distance + " needs " + request.need
+  }
+});
+
+/**
+ * Confirm Controller
+ */
+exampleApp.controller('ConfirmController', function($scope, $http, share, mySocket){
+  $scope.waitText = "Waiting for other neighbor's reply...";
   var data = {
-    "longitude" : share.requestLocation.longitude * Math.pow(10,6),
-    "latitude" : share.requestLocation.latitude * Math.pow(10,6),
+    "longitude" : encodeURI(share.location.longitude.toFixed(6)),
+    "latitude" : encodeURI(share.location.latitude.toFixed(6)),
     "range" : share.range
   };
 
   var url = "http://" + apiHost + "/calculateLocation" + "/" + share.token
   $http.get(url, {params: data}).then(function(response){
-    var result = response.data.data
+    var result = response.data.data;
     if(result.length > 0){
-
+      $scope.waitText = "Currently no people nearby.";
+    }else {
+      $scope.waitText = "We found " + result.length + " users around, please wait for the reply";
     }
   }, function(err){
     console.log("ERROR" , err.toString());
   });
+
+  mySocket.on("sendHelpAsker" + share.token, function(data){
+    share.setHelper(data);
+    $state.go('acception');
+  })
+});
+
+exampleApp.controller("AcceptionController", function($scope, share){
+
 });
 
 exampleApp.controller('ThankyouController', function($scope, GoogleMap){
 
+  $scope.sendInfo = function(){
+    var input = document.getElementById("addressInput");
+    share.setMeet(input.value)
+    $state.go('see')
+  };
+
   $scope.getAddress = function(){
 
     var processPosition = function(pos){
+      share.setLocation(pos.coords.latitude, pos.coords.longitude);
       return GoogleMap.getAddress(pos)
-    }
-
-    var wrongPosition = function(err){
-      alert("some error happened" + err )
-    }
+    };
 
     var processAddress = function(address){
       var input = document.getElementById("addressInput");
       input.value = address
-    }
+    };
+
+    var wrongPosition = function(err){
+      alert("some error happened" + err )
+    };
 
     GoogleMap.getLocation()
       .then(processPosition, wrongPosition)
       .then(processAddress, wrongPosition)
   }
 })
+
+exampleApp.controller('SeeController', function($scope, GoogleMap, mySocket){
+  mySocket.emit('sendHelp', {
+    asker : share.ask.asker,
+    meet : share.meet,
+    helper : share.token,
+    location : share.location,
+    distance : share.ask.distance
+  });
+});
 
 exampleApp.controller('CameraController', function($scope, Camera) {
   var options  = {
@@ -220,51 +285,57 @@ exampleApp.controller('CameraController', function($scope, Camera) {
 })
 
 
-exampleApp.controller('NavigationController',function($scope, GoogleMap){
+exampleApp.controller('NavigationController',function($scope, GoogleMap, mySocket){
+
+  var mapOptions = {
+    center: myLatlng,
+    zoom: 15,
+    disableDefaultUI: true,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  var startLatLng = new google.maps.LatLng(share.location.latitude, share.location.longitude);
+  var destLatLng = new google.maps.LatLng(share.helper.location.latitude, share.helper.location.longitude);
+  var map = new google.maps.Map(document.getElementById("mapNav"), mapOptions);
+  map.setCenter(startLatLng);
+  var request = {
+    origin:startLatLng,
+    destination:destLatLng,
+    travelMode: google.maps.TravelMode.WALKING
+  };
+
+  map = new google.maps.Map(document.getElementById("map3"), mapOptions);
+  var styles = globalConfig.mapStyle;
+  map.setOptions({styles: styles});
+  $scope.map = map;
+
+  $interval(function () {
+    GoogleMap.getLocation().then(function(pos){
+      var updateLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+      map.panTo(updateLatLng)
+      //myLocation.setLocation(updateLatLng)
+      mySocket.emit("sendUpdate", {
+        location : {
+          latitude : pos.coords.latitude,
+          longitude: pos.coords.longitude
+        },
+        asker : share.token,
+        helper : share.helper.token
+      })
+    })
+  }, 1000);
 
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
 
-  var location = getLocationFake();
-
-  function calculateAndDisplayRoute() {
-    directionsService.route({
-      origin:new google.maps.LatLng(52.558040,13.439400),
-      destination:new google.maps.LatLng(52.557956, 13.442910),
-      travelMode: google.maps.TravelMode.WALK
-    }, function(response, status) {
-      if (status === google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
-      } else {
-        window.alert('Directions request failed due to ' + status);
-      }
-    });
-  }
-
-  var request = {
-
-  };
+  directionsService.route(request, function(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(result);
+    }else {
+      window.alert('Directions request failed due to ' + status);
+    }
+  });
 })
-
-function getPushNotification(){
-  return{
-     request : "aspirin",
-     distance : "50m"
-  }
-
-}
-
-
-function getLocationFake(){
-
-  return {
-    latitude : 52.557956,
-    longitude : 13.442910,
-    name : "yang",
-    age: 21,
-  }
-}
 
 exampleApp.controller('MainController1', function($scope, GoogleMap) {
 
@@ -332,39 +403,44 @@ exampleApp.controller('MainController2', function($scope, GoogleMap) {
 
 
 
-exampleApp.controller('MainControllerComing', function($scope, GoogleMap,localStorageService, mySocket) {
+exampleApp.controller('ComingController', function($scope, GoogleMap,$interval, localStorageService, mySocket) {
 
-  var token = localStorageService.get("token");
-  mySocket.on("update", function(locationData){
-    console.log("receive location data" , locationData)
-  })
-  var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
   var mapOptions = {
     center: myLatlng,
     zoom: 15,
     disableDefaultUI: true,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   };
+  var startLatLng = new google.maps.LatLng(share.location.latitude, share.location.longitude)
   var map = new google.maps.Map(document.getElementById("map3"), mapOptions);
+  map.setCenter(startLatLng);
+  var myLocation = new google.maps.Marker({
+    position: startLatLng,
+    map: map
+  });
+  var comingLocaion = new google.maps.Marker({
+    position: startLatLng,
+    icon : 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+  });
 
-  var getCurrentLocation = function(){
-    GoogleMap.getLocation().then(function(pos){
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-        map: map,
-        title: "My Location"
-      });
-    })
-  }
   map = new google.maps.Map(document.getElementById("map3"), mapOptions);
   var styles = globalConfig.mapStyle;
   map.setOptions({styles: styles});
   $scope.map = map;
-  getCurrentLocation();
-  $scope.getLocation = function(){
-    getCurrentLocation()
-  };
+
+  $interval(function () {
+    GoogleMap.getLocation().then(function(pos){
+      var updateLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+      map.panTo(updateLatLng)
+      myLocation.setLocation(updateLatLng)
+    })
+  }, 1000);
+
+  mySocket.on("updateHelper" + share.token, function(data){
+    console.log("receive location data" , data)
+    var updateLatLng = new google.maps.LatLng(data.location.latitude, data.location.longitude)
+    comingLocaion.setLocation(updateLatLng)
+  });
 })
 
 

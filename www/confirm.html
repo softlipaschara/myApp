@@ -31,13 +31,11 @@
 <ion-view title="">
   <ion-content class="content">
     <a class= backButton href="#/photo"><img class=chevronLeft src="img/back.png"></a>
-    <a href="#/acception">
       <div class="container" style="margin-top: 80px;">
         <div><p class="sended">
           <p  id="title" style="color:black; font-size: 18px;">Request sended!</p>
           <!--<br/>-->
-          <p class="fadeInText" style="color:black">We found 3 users around!<br/>
-          Please wait for answer.</p>
+          <p class="fadeInText" id="waiting" style="color:black">{{waitText}}<br/></p>
         </p></div>
       </div>
 
@@ -62,7 +60,6 @@
         </div>
       </div>
 
-    </a>
   </ion-content>
 </ion-view>
 <!--</body>-->

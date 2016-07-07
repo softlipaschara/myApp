@@ -18,7 +18,7 @@ angular.module('starter.services', [])
   }
 }])
 
-.factory('GoogleMap', ['$q', function($q) {
+.factory('GoogleMap', ['$q', '$http', function($q, $http) {
   var geocoder = new google.maps.Geocoder();
 
   return {
@@ -31,6 +31,22 @@ angular.module('starter.services', [])
       }, function(err) {
         q.reject(err);
       }, options);
+
+      return q.promise;
+    },
+
+    saveLocation : function(coords, token){
+      var q = $q.defer();
+      var url = "http://" + apiHost + "/saveLocation" + "/" + token
+      var location = {
+        latitude  : encodeURI(coords.latitude.toFixed(6)),
+        longitude : encodeURI(coords.longitude.toFixed(6))
+      }
+      $http.get(url, {params: location}).then(function(response){
+        q.resolve(response);
+      }, function(err){
+        q.reject(err);
+      });
 
       return q.promise;
     },
@@ -54,7 +70,36 @@ angular.module('starter.services', [])
       });
 
       return q.promise;
-    }
+    },
+
+    getDirection : function(){
+
+    },
+
+    getLatLng : function(address){
+      var q = $q.defer();
+      var request = {
+        address: address + " Berlin, Germany"
+      };
+      geocoder.geocode(request, function(data, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (data[0] != null) {
+            console.log("after check we receive data 0 is", data[0])
+            var location = {
+              latitude : data[0].geometry.location.lat(),
+              longitude : data[0].geometry.location.lng()
+            };
+            q.resolve(location);
+          } else {
+            q.reject("No address available");
+          }
+        }else{
+          q.reject(status)
+        }
+      });
+
+      return q.promise;
+    },
 
   }
 }])
@@ -93,9 +138,23 @@ angular.module('starter.services', [])
 
 
   var tmp = {
-    requestLocation : {latitude : 37.3000, longitude : -120.4833},
+    location : {latitude : 37.3000, longitude : -120.4833},
     token : localStorageService.get("token"),
     range : 5,
+    need : "Anne Hathaway",
+    ask : {
+      need : "Cigar",
+      asker : "hallo",
+      distance : 0,
+    },
+    helper : {
+      token : null,
+      location : null,
+      distance : 0,
+      meet : ""
+    },
+    meet : "",
+
 
     setLocation : function(latitude, longitude){
       if(!isNumeric(latitude) || !isNumeric(longitude))
@@ -107,7 +166,7 @@ angular.module('starter.services', [])
       if(longitude >90 || longitude < -90)
         return;
 
-      this.requestLocation = {
+      this.location = {
         longitude : longitude,
         latitude : latitude
       }
@@ -116,12 +175,21 @@ angular.module('starter.services', [])
     setToken : function(token){
       this.token = token
     },
+    //TODO
     setRange : function(range){
       if(isNumeric(range))
         this.range = range
     },
-    getRequest : function(){
-
+    setAsk : function(askObj){
+      if(askObj != null)
+        this.ask = askObj
+    },
+    setHelper : function(helperObj){
+      if(helperObj != null)
+       this.helper = helperObj
+    },
+    setMeet : function(meetPoint){
+      this.meet = meetPoint
     }
   };
 
@@ -129,7 +197,9 @@ angular.module('starter.services', [])
 })
 
 .factory('mySocket', function (socketFactory) {
-  return socketFactory({
+  var factory = socketFactory({
     ioSocket: io.connect('http://localhost:3031')
   });
-});;
+  factory.forward('help');
+  return factory;
+});
