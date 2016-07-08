@@ -48,7 +48,7 @@
                 <div id="bubble3"></div>
               </div>
             </span>
-            <input type="text" class="input inputAfter" onclick="showDiv(),vanishDiv()">
+            <input type="text" id="inputNeed" class="input inputAfter" onclick="showDiv(),vanishDiv()">
 
           </label>
           <img src="img/triangle.png" class="triangle">
@@ -58,7 +58,7 @@
       <img src="img/need.png" class="shoutImage" id="buttonVanish" >
 
       <div class="container" id="buttonAppear" style="display:none">
-        <a href="#/map">
+        <a ng-click="goMap()">
           <div class="container">
             <img src="img/location.png" class="locationButton">
           </div>

@@ -138,7 +138,7 @@ angular.module('starter.services', [])
 
 
   var tmp = {
-    location : {latitude : 37.3000, longitude : -120.4833},
+    location : {latitude : 52.510237, longitude : 13.416837},
     token : localStorageService.get("token"),
     range : 5,
     need : "Anne Hathaway",
@@ -147,8 +147,8 @@ angular.module('starter.services', [])
       asker : "hallo",
       distance : 0,
     },
-    helper : {
-      token : null,
+    help : {
+      helper : null,
       location : null,
       distance : 0,
       meet : ""
@@ -184,12 +184,16 @@ angular.module('starter.services', [])
       if(askObj != null)
         this.ask = askObj
     },
-    setHelper : function(helperObj){
+    setHelp : function(helperObj){
       if(helperObj != null)
-       this.helper = helperObj
+       this.help = helperObj
     },
     setMeet : function(meetPoint){
       this.meet = meetPoint
+    },
+    setNeed : function(need){
+      if(need != null)
+        this.need = need
     }
   };
 
