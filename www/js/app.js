@@ -120,8 +120,6 @@ exampleApp.controller('StartController', function($scope, $state, GoogleMap, loc
       .then(processResult)
   };
 
-  getCurrentLocation();
-
   $scope.goMap = function(){
     var input = document.getElementById("inputNeed");
     if(input.value != "") {
@@ -140,9 +138,12 @@ exampleApp.controller('StartController', function($scope, $state, GoogleMap, loc
       console.log('create user token', createdId);
       share.setToken(createdId)
       localStorageService.set("token", createdId);
+      getCurrentLocation();
     }, function (err) {
       alert("error in create token from server");
     });
+  }else{
+    getCurrentLocation();
   }
 
   console.log('start with token:' , share.token);
@@ -345,7 +346,7 @@ exampleApp.controller('NavigationController',function($scope, $state, GoogleMap,
         helper : share.help.helper
       })
     })
-  }, 1000);
+  }, globalConfig.updateInterval);
 
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -403,10 +404,9 @@ exampleApp.controller('ComingController', function($scope, GoogleMap,$interval, 
   $interval(function () {
     GoogleMap.getLocation().then(function(pos){
       var updateLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
-      map.panTo(updateLatLng) //TODO maybe delete later
       myLocation.setPosition(updateLatLng)
     })
-  }, 1000);
+  }, globalConfig.updateInterval);
 
   //update coming loactino
   mySocket.on("updateHelper" + share.token, function(data){

@@ -3,6 +3,8 @@
  */
 var apiHost = '52.28.235.180:3031';
 var globalConfig = {
+  updateInterval : 2000,
+
   mapStyle : [
     {
       "featureType": "road",
