@@ -49,6 +49,10 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
       templateUrl: 'confirm.html',
       //controller: 'AnimationController'
     })
+    .state('pushAcception', {
+      url: '/pushAcception',
+      templateUrl: 'pushAcception.html',
+    })
     .state('acception', {
     url: '/acception',
     templateUrl: 'acception.html',
@@ -62,6 +66,10 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
       url: '/navigationBike',
       templateUrl: 'navigationBike.html',
       controller: 'MainController2'
+    })
+    .state('pushAsk', {
+      url: '/pushAsk',
+      templateUrl: 'pushAsk.html',
     })
     .state('ask', {
       url: '/ask',
@@ -1313,3 +1321,5 @@ function showSend() {
 function showPhoto() {
   document.getElementById('photoButton').style.display = "block";
 }
+
+
