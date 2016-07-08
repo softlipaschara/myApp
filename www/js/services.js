@@ -18,7 +18,7 @@ angular.module('starter.services', [])
   }
 }])
 
-.factory('GoogleMap', ['$q', function($q) {
+.factory('GoogleMap', ['$q', '$http', function($q, $http) {
   var geocoder = new google.maps.Geocoder();
 
   return {
@@ -31,6 +31,22 @@ angular.module('starter.services', [])
       }, function(err) {
         q.reject(err);
       }, options);
+
+      return q.promise;
+    },
+
+    saveLocation : function(coords, token){
+      var q = $q.defer();
+      var url = "http://" + apiHost + "/saveLocation" + "/" + token
+      var location = {
+        latitude  : encodeURI(coords.latitude.toFixed(6)),
+        longitude : encodeURI(coords.longitude.toFixed(6))
+      }
+      $http.get(url, {params: location}).then(function(response){
+        q.resolve(response);
+      }, function(err){
+        q.reject(err);
+      });
 
       return q.promise;
     },
@@ -54,7 +70,36 @@ angular.module('starter.services', [])
       });
 
       return q.promise;
-    }
+    },
+
+    getDirection : function(){
+
+    },
+
+    getLatLng : function(address){
+      var q = $q.defer();
+      var request = {
+        address: address + " Berlin, Germany"
+      };
+      geocoder.geocode(request, function(data, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (data[0] != null) {
+            console.log("after check we receive data 0 is", data[0])
+            var location = {
+              latitude : data[0].geometry.location.lat(),
+              longitude : data[0].geometry.location.lng()
+            };
+            q.resolve(location);
+          } else {
+            q.reject("No address available");
+          }
+        }else{
+          q.reject(status)
+        }
+      });
+
+      return q.promise;
+    },
 
   }
 }])
@@ -83,4 +128,82 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
+})
+
+.factory('share', function($http, localStorageService){
+
+  function isNumeric(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  }
+
+
+  var tmp = {
+    location : {latitude : 52.510237, longitude : 13.416837},
+    token : localStorageService.get("token"),
+    range : 5,
+    need : "Anne Hathaway",
+    ask : {
+      need : "Cigar",
+      asker : "hallo",
+      distance : 0,
+    },
+    help : {
+      helper : null,
+      location : null,
+      distance : 0,
+      meet : ""
+    },
+    meet : "",
+
+
+    setLocation : function(latitude, longitude){
+      if(!isNumeric(latitude) || !isNumeric(longitude))
+        return;
+
+      if(latitude >90 || latitude < -90)
+        return;
+
+      if(longitude >90 || longitude < -90)
+        return;
+
+      this.location = {
+        longitude : longitude,
+        latitude : latitude
+      }
+    },
+    isNumeric : isNumeric,
+    setToken : function(token){
+      this.token = token
+    },
+    //TODO
+    setRange : function(range){
+      if(isNumeric(range))
+        this.range = range
+    },
+    setAsk : function(askObj){
+      if(askObj != null)
+        this.ask = askObj
+    },
+    setHelp : function(helperObj){
+      if(helperObj != null)
+       this.help = helperObj
+    },
+    setMeet : function(meetPoint){
+      this.meet = meetPoint
+    },
+    setNeed : function(need){
+      if(need != null)
+        this.need = need
+    }
+  };
+
+  return tmp
+})
+
+.factory('mySocket', function (socketFactory) {
+  var factory = socketFactory({
+    ioSocket: io.connect('http://52.28.235.180:3031')
+  });
+  factory.forward('help');
+  return factory;
 });

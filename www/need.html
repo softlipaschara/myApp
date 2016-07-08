@@ -38,7 +38,7 @@
 
     </div>
       <div class="inputBlock">
-        <div class="textNeed"><p>Type what you need here:</p></div>
+        <div class="textNeed"><p>Type what hahaha need here:</p></div>
         <form class="form">
           <label class="item item-input">
             <span class="input-label">I need
@@ -48,7 +48,7 @@
                 <div id="bubble3"></div>
               </div>
             </span>
-            <input type="text" class="input inputAfter" onclick="showDiv(),vanishDiv()">
+            <input type="text" id="inputNeed" class="input inputAfter" onclick="showDiv(),vanishDiv()">
 
           </label>
           <img src="img/triangle.png" class="triangle">
@@ -58,7 +58,7 @@
       <img src="img/need.png" class="shoutImage" id="buttonVanish" >
 
       <div class="container" id="buttonAppear" style="display:none">
-        <a href="#/map">
+        <a ng-click="goMap()">
           <div class="container">
             <img src="img/location.png" class="locationButton">
           </div>
