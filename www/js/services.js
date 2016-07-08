@@ -202,7 +202,7 @@ angular.module('starter.services', [])
 
 .factory('mySocket', function (socketFactory) {
   var factory = socketFactory({
-    ioSocket: io.connect('http://localhost:3031')
+    ioSocket: io.connect('http://52.28.235.180:3031')
   });
   factory.forward('help');
   return factory;

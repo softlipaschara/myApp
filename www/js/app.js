@@ -99,6 +99,29 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
 
 exampleApp.controller('StartController', function($scope, $state, GoogleMap, localStorageService, mySocket, share, $http) {
 
+  var getCurrentLocation = function(){
+
+    function saveLocation(pos){
+      share.setLocation(pos.coords.latitude, pos.coords.longitude);
+      return GoogleMap.saveLocation(share.location, share.token)
+    }
+
+    function saveFakeLocation(err){
+      return GoogleMap.saveLocation(share.location, share.token)
+    }
+
+    function processResult(result){
+      var location = result.data.data.location
+      console.log("save location successful with result " , result)
+    }
+
+    GoogleMap.getLocation()
+      .then(saveLocation, saveFakeLocation)
+      .then(processResult)
+  };
+
+  getCurrentLocation();
+
   $scope.goMap = function(){
     var input = document.getElementById("inputNeed");
     if(input.value != "") {
@@ -158,34 +181,11 @@ exampleApp.controller('MainController', function($scope, GoogleMap, localStorage
   var map = new google.maps.Map(document.getElementById("map"), mapOptions);
   $scope.map = map;
 
-  var getCurrentLocation = function(){
-
-    function saveLocation(pos){
-      map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-      share.setLocation(pos.coords.latitude, pos.coords.longitude);
-      return GoogleMap.saveLocation(share.location, share.token)
-    }
-
-    function processResult(result){
-      var location = result.data.data.location
-      console.log("save location successful with result " , result)
-      var myLocation = new google.maps.Marker({
-        position: new google.maps.LatLng(location.latitude, location.longitude),
-        map: map,
-        title: "My Location"
-      });
-    }
-
-    GoogleMap.getLocation()
-      .then(saveLocation)
-      .then(processResult)
-  };
-
-  getCurrentLocation();
-
-  $scope.getLocation = function(){
-    getCurrentLocation()
-  };
+  var myLocation = new google.maps.Marker({
+    position: new google.maps.LatLng(location.latitude, location.longitude),
+    map: map,
+    title: "My Location"
+  });
 });
 
 exampleApp.controller('AskController', function($scope, $state, share, mySocket){
@@ -353,7 +353,7 @@ exampleApp.controller('NavigationController',function($scope, $state, GoogleMap,
 
   var request = {
     origin:startLatLng,
-    destination:destLatLng,
+    destination:share.help.meet + ", Berlin, Germany",
     travelMode: google.maps.TravelMode.WALKING
   };
   directionsService.route(request, function(result, status) {
