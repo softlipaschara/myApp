@@ -67,12 +67,10 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
     .state('navigationWalk', {
       url: '/navigationWalk',
       templateUrl: 'navigationWalk.html',
-      controller: 'NavigationController'
-    })
-    .state('navigationBike', {
-      url: '/navigationBike',
-      templateUrl: 'navigationBike.html',
-      controller: 'MainController2'
+      controller: 'NavigationController',
+      params: {
+        bike: false
+      }
     })
     .state('pushAsk', {
       url: '/pushAsk',
@@ -241,7 +239,12 @@ exampleApp.controller('ConfirmController', function($scope, $http, share, $state
 });
 
 exampleApp.controller("AcceptionController", function($scope,$state, share){
-
+  $scope.navBike = function(){
+    $state.go('navigationWalk' , true)
+  }
+  $scope.navWalk = function(){
+    $state.go('navigationWalk' , false)
+  }
 });
 
 exampleApp.controller('ThankyouController', function($scope, share, mySocket, $state, GoogleMap){
@@ -314,7 +317,8 @@ exampleApp.controller('CameraController', function($scope, share, Camera) {
 })
 
 
-exampleApp.controller('NavigationController',function($scope, $state, GoogleMap, share, $interval,mySocket){
+exampleApp.controller('NavigationController',function($stateParams, $scope, $state, GoogleMap, share, $interval,mySocket){
+  
 
   var startLatLng = new google.maps.LatLng(share.location.latitude, share.location.longitude);
   var destLatLng = new google.maps.LatLng(share.help.location.latitude, share.help.location.longitude);
@@ -331,11 +335,6 @@ exampleApp.controller('NavigationController',function($scope, $state, GoogleMap,
   var styles = globalConfig.mapStyle;
   map.setOptions({styles: styles});
   $scope.map = map;
-
-
-  $scope.navBike = function(){
-
-  }
 
   $interval(function () {
     GoogleMap.getLocation().then(function(pos){
@@ -364,31 +363,32 @@ exampleApp.controller('NavigationController',function($scope, $state, GoogleMap,
   var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
 
-  var request = {
-    origin:startLatLng,
-    destination:share.help.meet + ", Berlin, Germany",
-    travelMode: google.maps.TravelMode.WALKING
+  var directRoute = function(travelMode){
+    var request = {
+      origin:startLatLng,
+      destination:share.help.meet + ", Berlin, Germany",
+      travelMode: travelMode
+    };
+
+    directionsService.route(request, function(result, status) {
+      console.log('result is', result);
+      if (status == google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(result);
+      }else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
   };
-  directionsService.route(request, function(result, status) {
-    console.log('result is', result);
-    if (status == google.maps.DirectionsStatus.OK) {
-      directionsDisplay.setDirections(result);
-    }else {
-      window.alert('Directions request failed due to ' + status);
-    }
-  });
+
+  $scope.navBike = directRoute(google.maps.TravelMode.BICYCLING)
+  $scope.navWalk = directRoute(google.maps.TravelMode.WALKING)
+
+  if($stateParams.bike){
+    directRoute(google.maps.TravelMode.BICYCLING)
+  }else{
+    directRoute(google.maps.TravelMode.WALKING)
+  }
 })
-
-exampleApp.controller('MainController1', function($scope, share, GoogleMap) {
-
-})
-
-
-exampleApp.controller('MainController2', function($scope,share,  GoogleMap) {
-
-  });
-
-
 
 exampleApp.controller('ComingController', function($scope, GoogleMap,$interval, share, localStorageService, mySocket) {
 
