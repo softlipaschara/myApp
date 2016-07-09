@@ -37,12 +37,17 @@
       <div id="dot1"></div>
     </div>
     <div class="photoBlock">
+      <!--<div class="text textMap fadeInOut hint">-->
+        <!--Take a photo for the lovely neighbor who helps you-->
+      <!--</div>-->
       <div class="text textMap" style="margin-top: 50px;">
-        <p>Recognize me by:</p>
+        <!--<p>Recognize me by:</p>-->
+        <p>Take a photo to make him/her recognize you:</p>
       </div>
       <ng-switch on="hasPhoto">
         <div class="container">
-          <img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">
+          <!--<img ng-switch-when="true" ng-src="{{lastPhoto}}" class="photo">-->
+          <img ng-switch-when="true" ng-src="./img/asker.jpg" class="photo">
         </div>
         <div class="container">
           <div ng-switch-default="" class="containerCam" style="margin-top: 0">

@@ -126,7 +126,7 @@
 #map1{
   position:relative;
   width:86%;
-  height:450PX;
+  height:310PX;
   /*height:568px;*/
   /*height:50%;*/
   margin: -10px auto 0 auto;
@@ -139,7 +139,7 @@
 #map2{
   position:relative;
   width:86%;
-  height:450PX;
+  height:310PX;
   /*height:568px;*/
   /*height:50%;*/
   margin: -10px auto 0 auto;
@@ -350,20 +350,21 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.29);
  }
 #circle{
-  width:200px;
-  height:200px;
+  width:260px;
+  height:260px;
   border-radius: 50%;
-  opacity: 0.2;
+  opacity: 0.4;
   background-color: grey;
-  margin-top: -291px;
+  margin-top: -321px;
   animation-name: circle;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  animation-iteration-count: 1;
+  /*animation-delay: 3s;*/
 }
 @keyframes circle {
-  from{transform:none;}
-  50%{transform:scale(1.1);}
-  to{transform:none;}
+  from{transform:scale(0.7);}
+  70%{transform:scale(0.7);}
+  to{transform:scale(1);}
 }
 .textAsk
 {
@@ -705,4 +706,40 @@ a{
 @keyframes fadeIn {
   from{opacity:0.9}
   to{opacity:1}
+}
+.text.textMap.fadeInOut.hint{
+  margin-bottom: -45px;
+}
+.pushAsk{
+  width:320px;
+  height:568px;
+}
+#destination{
+  font-size: 16px;
+  /*margin-left:30px;*/
+  margin-top: 30px;
+  /*width:86%;*/
+  margin:0 20px;
+}
+#meetAddress{
+  font-size:16px ;
+}
+.meetPoint{
+  margin-top: 20px;
+}
+.askAcception{
+  margin-top: -325px;
+  color:white;
+  font-size: 16px;
+  margin-left: 33px;
+}
+.oops{
+  margin-top: 140px;
+  width:48%;
+}
+.bigsmile{
+  width:18px;
+  height:17px;
+  margin-left: 86px;
+  margin-top: 10px;
 }

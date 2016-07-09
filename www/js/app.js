@@ -55,6 +55,10 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
       templateUrl: 'confirm.html',
       controller: 'ConfirmController'
     })
+    .state('pushAcception', {
+      url: '/pushAcception',
+      templateUrl: 'pushAcception.html',
+    })
     .state('acception', {
       url: '/acception',
       templateUrl: 'acception.html',
@@ -70,6 +74,10 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
       templateUrl: 'navigationBike.html',
       controller: 'MainController2'
     })
+    .state('pushAsk', {
+      url: '/pushAsk',
+      templateUrl: 'pushAsk.html',
+    })
     .state('ask', {
       url: '/ask',
       templateUrl: 'ask.html',
@@ -78,6 +86,10 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
     .state('anyway', {
       url: '/anyway',
       templateUrl: 'anyway.html',
+    })
+    .state('alreadyAccepted', {
+      url: '/alreadyAccepted',
+      templateUrl: 'alreadyAccepted.html',
     })
     .state('thankyou', {
       url: '/thankyou',
@@ -161,7 +173,7 @@ exampleApp.controller('StartController', function($scope, $state, GoogleMap, loc
       }
     });
     if(isFound){
-      $state.go("ask")
+      $state.go("pushAsk")
     }
   });
 });
@@ -224,7 +236,7 @@ exampleApp.controller('ConfirmController', function($scope, $http, share, $state
   mySocket.on("sendHelpAsker" + share.token, function(data){
     console.log('receive infomation is', data)
     share.setHelp(data);
-    $state.go('acception');
+    $state.go('pushAcception');
   })
 });
 
@@ -433,3 +445,5 @@ function showSend() {
 function showPhoto() {
   document.getElementById('photoButton').style.display = "block";
 }
+
+
