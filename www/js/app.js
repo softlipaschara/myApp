@@ -75,6 +75,7 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
     .state('pushAsk', {
       url: '/pushAsk',
       templateUrl: 'pushAsk.html',
+      controller: 'PushAskController',
     })
     .state('ask', {
       url: '/ask',
@@ -203,7 +204,7 @@ exampleApp.controller('AskController', function($scope, $state, share, mySocket)
   var request = share.ask;
   $scope.need = "some people need help, but we don't know what he/she need";
   if(request.need != null && request.need != null){
-    $scope.need = "A lovely neighbor in " + request.distance + " needs " + request.need
+    $scope.need = "A lovely neighbor in " + request.distance + "m needs " + request.need
   }
 });
 
@@ -294,6 +295,14 @@ exampleApp.controller('SeeController', function($scope, GoogleMap, share, mySock
 
 });
 
+exampleApp.controller('PushAskController', function($scope, share, mySocket){
+  var request = share.ask;
+  $scope.need = "some people need help, but we don't know what he/she need";
+  if(request.need != null && request.need != null){
+    $scope.need = "A lovely neighbor in " + request.distance + "m needs " + request.need
+  }
+});
+
 exampleApp.controller('CameraController', function($scope, share, Camera) {
   var options  = {
     quality: 100,
@@ -318,7 +327,8 @@ exampleApp.controller('CameraController', function($scope, share, Camera) {
 
 
 exampleApp.controller('NavigationController',function($stateParams, $scope, $state, GoogleMap, share, $interval,mySocket){
-  
+
+  $scope.meetPoint = share.help.meet != "" ? share.help.meet : "his current address";
 
   var startLatLng = new google.maps.LatLng(share.location.latitude, share.location.longitude);
   var destLatLng = new google.maps.LatLng(share.help.location.latitude, share.help.location.longitude);
