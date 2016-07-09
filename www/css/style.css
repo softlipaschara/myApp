@@ -126,7 +126,7 @@
 #map1{
   position:relative;
   width:86%;
-  height:450PX;
+  height:310PX;
   /*height:568px;*/
   /*height:50%;*/
   margin: -10px auto 0 auto;
@@ -139,7 +139,7 @@
 #map2{
   position:relative;
   width:86%;
-  height:450PX;
+  height:310PX;
   /*height:568px;*/
   /*height:50%;*/
   margin: -10px auto 0 auto;
@@ -713,4 +713,33 @@ a{
 .pushAsk{
   width:320px;
   height:568px;
+}
+#destination{
+  font-size: 16px;
+  /*margin-left:30px;*/
+  margin-top: 30px;
+  /*width:86%;*/
+  margin:0 20px;
+}
+#meetAddress{
+  font-size:16px ;
+}
+.meetPoint{
+  margin-top: 20px;
+}
+.askAcception{
+  margin-top: -325px;
+  color:white;
+  font-size: 16px;
+  margin-left: 33px;
+}
+.oops{
+  margin-top: 140px;
+  width:48%;
+}
+.bigsmile{
+  width:18px;
+  height:17px;
+  margin-left: 86px;
+  margin-top: 10px;
 }

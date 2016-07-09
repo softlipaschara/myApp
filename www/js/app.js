@@ -79,6 +79,10 @@ var exampleApp = angular.module('starter', ['ionic', 'starter.services'])
       url: '/anyway',
       templateUrl: 'anyway.html',
     })
+    .state('alreadyAccepted', {
+      url: '/alreadyAccepted',
+      templateUrl: 'alreadyAccepted.html',
+    })
     .state('thankyou', {
       url: '/thankyou',
       templateUrl: 'thankyou.html',
