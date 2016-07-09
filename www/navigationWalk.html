@@ -32,12 +32,8 @@
   <ion-content  class="content">
     <a class= backButton href="#/acception"><img class=chevronLeft src="img/back.png"></a>
     <div class="containerIcon">
-      <a ng-click="navWalk()">
-      <img src="img/walk1.png" class="walk1"/>
-      </a>
-      <a ng-click="navBike()">
-        <img src="img/bike.png" class="bike1"/>
-      </a>
+      <img ng-click="navWalk()" src="img/walk1.png" id="walkIcon"/>
+      <img ng-click="navBike()" src="img/bike.png" id="bikeIcon"/>
     </div>
 
     <div  id="mapNav" data-tap-disabled="true">

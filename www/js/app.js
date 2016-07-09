@@ -69,7 +69,7 @@ var exampleApp = angular.module('starter', ['ionic','ionic.service.core', 'start
       templateUrl: 'navigationWalk.html',
       controller: 'NavigationController',
       params: {
-        bike: false
+        isBike: false
       }
     })
     .state('pushAsk', {
@@ -241,10 +241,10 @@ exampleApp.controller('ConfirmController', function($scope, $http, share, $state
 
 exampleApp.controller("AcceptionController", function($scope,$state, share){
   $scope.navBike = function(){
-    $state.go('navigationWalk' , true)
+    $state.go('navigationWalk' , {isBike : true})
   }
   $scope.navWalk = function(){
-    $state.go('navigationWalk' , false)
+    $state.go('navigationWalk' , {isBike : false})
   }
 });
 
@@ -328,7 +328,7 @@ exampleApp.controller('CameraController', function($scope, share, Camera) {
 
 exampleApp.controller('NavigationController',function($stateParams, $scope, $state, GoogleMap, share, $interval,mySocket){
 
-  $scope.meetPoint = share.help.meet != "" ? share.help.meet : "his current address";
+  $scope.meetAddress = share.help.meet != "" ? share.help.meet : "his current address";
 
   var startLatLng = new google.maps.LatLng(share.location.latitude, share.location.longitude);
   var destLatLng = new google.maps.LatLng(share.help.location.latitude, share.help.location.longitude);
@@ -373,11 +373,19 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
   var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
 
-  var directRoute = function(travelMode){
+  var directRoute = function(isBike){
+    console.log("now nav with bike :" ,isBike)
+    var walkEl = document.getElementById("walkIcon")
+    var bikeEl = document.getElementById("bikeIcon")
+    walkEl.className = !isBike ? "walk-white" : "walk-black";
+    walkEl.src = !isBike ? "img/walk1.png" : "img/walk.png";
+    bikeEl.className = isBike ? "bike-white" : "bike-black";
+    bikeEl.src = isBike ? "img/bike1.png" : "img/bike.png";
+
     var request = {
       origin:startLatLng,
       destination:share.help.meet + ", Berlin, Germany",
-      travelMode: travelMode
+      travelMode: isBike ? google.maps.TravelMode.BICYCLING : google.maps.TravelMode.WALKING
     };
 
     directionsService.route(request, function(result, status) {
@@ -390,14 +398,14 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
     });
   };
 
-  $scope.navBike = directRoute(google.maps.TravelMode.BICYCLING)
-  $scope.navWalk = directRoute(google.maps.TravelMode.WALKING)
-
-  if($stateParams.bike){
-    directRoute(google.maps.TravelMode.BICYCLING)
-  }else{
-    directRoute(google.maps.TravelMode.WALKING)
+  $scope.navBike = function(){
+    directRoute(true);
   }
+  $scope.navWalk = function(){
+    directRoute(false);
+  }
+  console.log("stateParams is, ", $stateParams)
+  directRoute($stateParams.isBike)
 })
 
 exampleApp.controller('ComingController', function($scope, GoogleMap,$interval, share, localStorageService, mySocket) {
@@ -413,12 +421,13 @@ exampleApp.controller('ComingController', function($scope, GoogleMap,$interval, 
   var map = new google.maps.Map(document.getElementById("mapNav"), mapOptions);
   var myLocation = new google.maps.Marker({
     position: startLatLng,
+    icon : "http://66.media.tumblr.com/4efe7440870da2674c66e73912fa2ec5/tumblr_oa1tw6Flcc1qkfs2lo2_75sq.png",
     map: map
   });
   var comingLocaion = new google.maps.Marker({
     position: startLatLng,
     map : map,
-    icon : 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+    icon : 'http://67.media.tumblr.com/085fb9fc287c722a6a3045b5a3ab2b58/tumblr_oa1tw6Flcc1qkfs2lo1_75sq.png'
   });
   $scope.map = map;
 

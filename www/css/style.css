@@ -660,23 +660,23 @@ a{
   height:30px;
   margin:22px 15px
 }
-.walk1{
+.walk-white{
   width:62px;
   height:54px;
   /*margin:0 10px;*/
 
 }
-.bike1{
+.bike-black{
   width:39px;
   height:24px;
   margin:0 10px;
 }
-.walk2{
+.walk-black{
   width:19px;
   height:31px;
   margin:0 10px;
 }
-.bike2{
+.bike-white{
   width:62px;
   height:54px;
 }
