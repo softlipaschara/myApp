@@ -751,3 +751,8 @@ a{
   margin-left: 86px;
   margin-top: 10px;
 }
+#meetPoint{
+  margin-left: 0px;
+  margin-bottom: -2px;
+  width: 14px;
+}
