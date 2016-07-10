@@ -224,7 +224,7 @@ exampleApp.controller('ConfirmController', function($scope, $http, share, $state
   $http.get(url, {params: data}).then(function(response){
     var result = response.data.data;
     if(result.length > 0){
-      $scope.waitText = "We found " + result.length + " users around, please wait for the reply";
+      $scope.waitText = "We found " + result.length + " users around, please wait for answer";
     }else {
       $scope.waitText = "Currently no people nearby.";
     }

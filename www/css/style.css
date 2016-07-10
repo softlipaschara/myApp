@@ -155,7 +155,7 @@
   height:380PX;
   /*height:568px;*/
   /*height:50%;*/
-  margin: 10px auto 0 auto;
+  margin: -10px auto 0 auto;
   /*border-radius:20px;*/
   /*box-shadow: 0px 0px 15px 0px rgba(193,193,193,0.50);*/
   /*border:1px solid #ddd;*/
@@ -581,6 +581,14 @@ a{
 .bubbles1{
   margin-top: 10px;
   margin-left: 15px;
+}
+#inputNeed{
+  font-size: 20px;
+  /*margin-top: -2px;*/
+}
+#addressInput{
+  font-size: 20px;
+  margin-left: -38px;
 }
 .input.inputAfter{
   margin-left: -40px;
