@@ -359,14 +359,14 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
 
   $interval(function () {
     GoogleMap.getLocation().then(function(pos){
-      var updateLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
+      var updatedLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
       //map.panTo(updateLatLng); //todo maybe delete later
       //myLocation.setPosition(updateLatLng)
       var updatedLocation = {
         latitude : pos.coords.latitude,
         longitude: pos.coords.longitude
       };
-      myLocation.setPosition(updatedLocation);
+      myLocation.setPosition(updatedLatLng);
       share.setLocation(updatedLocation);
       mySocket.emit("sendUpdate", {
         location : updatedLocation,
