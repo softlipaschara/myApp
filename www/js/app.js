@@ -346,6 +346,17 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
   map.setOptions({styles: styles});
   $scope.map = map;
 
+  var myLocation = new google.maps.Marker({
+    position: startLatLng,
+    icon : "http://66.media.tumblr.com/4efe7440870da2674c66e73912fa2ec5/tumblr_oa1tw6Flcc1qkfs2lo2_75sq.png",
+    map: map
+  });
+  var meetLocaion = new google.maps.Marker({
+    position: destLatLng,
+    map : map,
+    icon : 'http://67.media.tumblr.com/085fb9fc287c722a6a3045b5a3ab2b58/tumblr_oa1tw6Flcc1qkfs2lo1_75sq.png'
+  });
+
   $interval(function () {
     GoogleMap.getLocation().then(function(pos){
       var updateLatLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
@@ -355,12 +366,8 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
         latitude : pos.coords.latitude,
         longitude: pos.coords.longitude
       };
+      myLocation.setPosition(updatedLocation);
       share.setLocation(updatedLocation);
-      console.log('now send update with data' , {
-        location : updatedLocation,
-        asker : share.token,
-        helper : share.help.helper
-      }) //TODO
       mySocket.emit("sendUpdate", {
         location : updatedLocation,
         asker : share.token,
@@ -372,6 +379,12 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
   var directionsService = new google.maps.DirectionsService;
   var directionsDisplay = new google.maps.DirectionsRenderer;
   directionsDisplay.setMap(map);
+  directionsDisplay.setOptions( { suppressMarkers: true } );
+
+  GoogleMap.getLatLng(share.help.meet + ", Berlin, Germany").then(function(location){
+    var updatedHelperLatLng = new google.maps.LatLng(location.latitude, location.longitude);
+    meetLocaion.setPosition(updatedHelperLatLng);
+  });
 
   var directRoute = function(isBike){
     console.log("now nav with bike :" ,isBike)
@@ -386,7 +399,7 @@ exampleApp.controller('NavigationController',function($stateParams, $scope, $sta
       origin:startLatLng,
       destination:share.help.meet + ", Berlin, Germany",
       travelMode: isBike ? google.maps.TravelMode.BICYCLING : google.maps.TravelMode.WALKING
-    };
+  };
 
     directionsService.route(request, function(result, status) {
       console.log('result is', result);
